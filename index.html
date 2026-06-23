@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EKO LAB — Wireframe: Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f0f0; color: #333; font-size: 14px; }
+
+    .wf-box        { background: #d4d4d4; border: 1px solid #aaa; }
+    .wf-box-dark   { background: #999;    border: 1px solid #777; }
+    .wf-box-light  { background: #e8e8e8; border: 1px solid #bbb; }
+    .wf-label      { color: #555; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .wf-heading    { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 6px; }
+    .wf-subhead    { font-size: 13px; color: #666; margin-bottom: 12px; }
+    .wf-text       { background: #ccc; height: 10px; border-radius: 2px; margin-bottom: 6px; }
+    .wf-btn        { display: inline-block; background: #888; color: #fff; padding: 6px 16px; font-size: 12px; border: none; cursor: pointer; text-decoration: none; }
+    .wf-btn:hover  { background: #666; color: #fff; }
+    .wf-btn-outline{ display: inline-block; background: transparent; color: #666; padding: 6px 16px; font-size: 12px; border: 1px solid #888; cursor: pointer; text-decoration: none; }
+    .wf-btn-outline:hover { background: #e0e0e0; color: #333; }
+    .wf-img        { background: #c0c0c0; border: 1px solid #aaa; display: flex; align-items: center; justify-content: center; color: #777; font-size: 11px; }
+    .wf-badge      { display: inline-block; background: #bbb; color: #555; padding: 2px 10px; font-size: 11px; border-radius: 2px; margin: 2px; }
+    .wf-notice     { border: 1px dashed #aaa; background: #e4e4e4; padding: 8px 12px; color: #777; font-size: 12px; font-style: italic; }
+    .wf-divider    { border: none; border-top: 1px solid #bbb; margin: 12px 0; }
+    .wf-card       { background: #ddd; border: 1px solid #bbb; padding: 16px; height: 100%; }
+    .wf-card-dark  { background: #c4c4c4; border: 1px solid #aaa; padding: 16px; height: 100%; }
+    .wf-avatar     { width: 56px; height: 56px; border-radius: 50%; background: #aaa; border: 1px solid #999; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 11px; }
+    .wf-input      { width: 100%; background: #e0e0e0; border: 1px solid #bbb; padding: 8px 10px; margin-bottom: 10px; color: #555; font-size: 13px; }
+    textarea.wf-input { height: 80px; resize: none; }
+    .wf-map        { background: #c8c8c8; border: 1px solid #aaa; display: flex; align-items: center; justify-content: center; color: #777; font-size: 12px; }
+
+    section        { padding: 48px 0; background: #ebebeb; border-bottom: 2px solid #ccc; }
+    section.alt    { background: #e0e0e0; }
+    section.dark   { background: #c8c8c8; }
+
+    #header        { background: #ddd; border-bottom: 2px solid #aaa; padding: 10px 0; position: sticky; top: 0; z-index: 100; }
+    .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #888; background: #d8d8d8; border-bottom: 1px solid #ccc; padding: 4px 0; text-align: center; }
+    .wf-nav-link   { color: #555; font-size: 12px; padding: 4px 8px; text-decoration: none; }
+    .wf-nav-link:hover { color: #222; }
+    .nav-active    { color: #222 !important; font-weight: bold; border-bottom: 1px solid #555; }
+
+    #footer        { background: #ccc; border-top: 2px solid #aaa; padding: 32px 0 16px; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="section-label">Header (sticky)</div>
+<header id="header">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
+      <a href="index.html" class="wf-box d-flex align-items-center gap-2 text-decoration-none" style="padding:6px 12px">
+        <div class="wf-img" style="width:32px;height:32px;font-size:9px">LOGO</div>
+        <span style="font-weight:bold; font-size:15px; color:#555">ECOLAB</span>
+      </a>
+      <div class="d-none d-lg-flex gap-1 flex-wrap">
+        <a href="index.html"    class="wf-nav-link nav-active">Home</a>
+        <a href="about.html"    class="wf-nav-link">About</a>
+        <a href="services.html" class="wf-nav-link">Services</a>
+        <a href="contact.html"  class="wf-nav-link">Contact</a>
+      </div>
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <span style="font-size:12px; color:#555">📞 +380 67 605 09 01</span>
+        <a href="contact.html" class="wf-btn">Get in Touch</a>
+        <span class="wf-box" style="padding:3px 8px; font-size:11px; color:#555">UA | EN</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- HERO -->
+<div class="section-label">Section — Hero</div>
+<section class="dark" style="padding:64px 0">
+  <div class="container text-center">
+    <div class="wf-label mb-2">Donor logos (4 placeholders)</div>
+    <div class="d-flex justify-content-center gap-3 flex-wrap mb-4">
+      <div class="wf-box" style="padding:10px 18px; min-width:110px; font-size:11px; color:#666">Swiss Confederation</div>
+      <div class="wf-box" style="padding:10px 18px; min-width:110px; font-size:11px; color:#666">World Bank</div>
+      <div class="wf-box" style="padding:10px 18px; min-width:110px; font-size:11px; color:#666">Enabel</div>
+      <div class="wf-box" style="padding:10px 18px; min-width:110px; font-size:11px; color:#666">Amiens Métropole</div>
+    </div>
+    <div class="wf-box-dark mx-auto mb-2" style="height:36px; max-width:600px; display:flex; align-items:center; justify-content:center; color:#555; font-size:13px">H1 — Ukraine's Expert Centre for Asbestos Detection</div>
+    <div class="wf-box mx-auto mb-4" style="height:20px; max-width:500px; display:flex; align-items:center; justify-content:center; color:#666; font-size:11px">Subheadline — Independent testing. ISO-compliant methods.</div>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="contact.html" class="wf-btn">[ Submit a Request ]</a>
+      <a href="about.html"   class="wf-btn-outline">[ Learn More ]</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div style="background:#ddd; border-top:1px solid #bbb; border-bottom:1px solid #bbb; padding:10px 0;">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-center gap-4 flex-wrap">
+      <span class="wf-badge">✓ Accredited Laboratory</span>
+      <span class="wf-badge">✓ DSTU ISO 10012:2005</span>
+      <span class="wf-badge">✓ ISO-compliant methods</span>
+      <a href="contact.html" class="wf-btn-outline" style="font-size:11px">[ View Documents → ]</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- WHY ASBESTOS MATTERS -->
+<div class="section-label">Section — Why Asbestos Testing Matters</div>
+<section>
+  <div class="container">
+    <div class="wf-heading">Why Asbestos Testing Matters</div>
+    <div class="wf-subhead">Section subtitle</div>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="wf-card">
+          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
+          <div style="font-weight:bold; margin-bottom:6px">Health Risk</div>
+          <div class="wf-text"></div>
+          <div class="wf-text" style="width:80%"></div>
+          <div class="wf-text" style="width:60%"></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="wf-card">
+          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
+          <div style="font-weight:bold; margin-bottom:6px">Legal Requirements</div>
+          <div class="wf-text"></div>
+          <div class="wf-text" style="width:75%"></div>
+          <div class="wf-text" style="width:55%"></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="wf-card">
+          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
+          <div style="font-weight:bold; margin-bottom:6px">Cannot Be Identified Visually</div>
+          <div class="wf-text"></div>
+          <div class="wf-text" style="width:85%"></div>
+          <div class="wf-text" style="width:65%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SERVICES PREVIEW (3 cards) -->
+<div class="section-label">Section — Services Preview (3 of 5)</div>
+<section class="alt">
+  <div class="container">
+    <div class="wf-heading">Our Services</div>
+    <div class="wf-subhead">Overview — <a href="services.html" class="wf-btn-outline" style="font-size:11px">View All Services →</a></div>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="wf-card">
+          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
+          <div style="font-weight:bold; margin-bottom:4px">Asbestos Testing</div>
+          <div class="wf-text"></div>
+          <div class="wf-text" style="width:80%"></div>
+          <div class="wf-text" style="width:60%; background:#bbb; margin-top:4px"></div>
+          <div class="mt-3"><a href="services.html" class="wf-btn" style="font-size:11px">[ Request this service ]</a></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="wf-card">
+          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
+          <div style="font-weight:bold; margin-bottom:4px">Sampling</div>
+          <div class="wf-text"></div>
+          <div class="wf-text" style="width:75%"></div>
+          <div class="wf-text" style="width:55%; background:#bbb; margin-top:4px"></div>
+          <div class="mt-3"><a href="services.html" class="wf-btn" style="font-size:11px">[ Request this service ]</a></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="wf-card">
+          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
+          <div style="font-weight:bold; margin-bottom:4px">Consulting & Training</div>
+          <div class="wf-text"></div>
+          <div class="wf-text" style="width:80%"></div>
+          <div class="wf-text" style="width:60%; background:#bbb; margin-top:4px"></div>
+          <div class="mt-3"><a href="services.html" class="wf-btn" style="font-size:11px">[ Request this service ]</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="services.html" class="wf-btn-outline">View All Services →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- TRUST STRIP -->
+<div class="section-label">Section — Trust Strip</div>
+<section class="dark" style="padding:32px 0">
+  <div class="container">
+    <div class="wf-label text-center mb-3">Trust signals</div>
+    <div class="d-flex justify-content-center gap-4 flex-wrap text-center">
+      <div>
+        <div class="wf-card-dark" style="padding:14px 24px; min-width:110px">
+          <div style="font-size:22px; font-weight:bold; color:#555">200</div>
+          <div style="font-size:11px; color:#777">samples/month</div>
+        </div>
+      </div>
+      <div>
+        <div class="wf-card-dark" style="padding:14px 24px; min-width:110px">
+          <div style="font-size:22px; font-weight:bold; color:#555">4</div>
+          <div style="font-size:11px; color:#777">international donors</div>
+        </div>
+      </div>
+      <div>
+        <div class="wf-card-dark" style="padding:14px 24px; min-width:110px">
+          <div style="font-size:22px; font-weight:bold; color:#555">ISO</div>
+          <div style="font-size:11px; color:#777">17025 compliant</div>
+        </div>
+      </div>
+      <div>
+        <div class="wf-card-dark" style="padding:14px 24px; min-width:110px">
+          <div style="font-size:22px; font-weight:bold; color:#555">5</div>
+          <div style="font-size:11px; color:#777">team specialists</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- NEWS & EVENTS -->
+<div class="section-label">Section — News & Events</div>
+<section class="alt">
+  <div class="container">
+    <div class="wf-heading">News & Events</div>
+    <div class="wf-notice mb-4">News and announcements will be added after the website launch.</div>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="wf-card" style="padding:0;overflow:hidden">
+          <div class="wf-img" style="height:140px;width:100%">Image placeholder</div>
+          <div style="padding:14px">
+            <div class="wf-text" style="width:60px;height:8px;background:#bbb;margin-bottom:8px"></div>
+            <div class="wf-text" style="width:90%"></div>
+            <div class="wf-text" style="width:80%"></div>
+            <div class="wf-text" style="width:70%"></div>
+            <div class="mt-2"><span class="wf-btn-outline" style="font-size:11px">Read more →</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="wf-card" style="padding:0;overflow:hidden">
+          <div class="wf-img" style="height:140px;width:100%">Image placeholder</div>
+          <div style="padding:14px">
+            <div class="wf-text" style="width:60px;height:8px;background:#bbb;margin-bottom:8px"></div>
+            <div class="wf-text" style="width:90%"></div>
+            <div class="wf-text" style="width:75%"></div>
+            <div class="wf-text" style="width:65%"></div>
+            <div class="mt-2"><span class="wf-btn-outline" style="font-size:11px">Read more →</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="wf-card" style="padding:0;overflow:hidden">
+          <div class="wf-img" style="height:140px;width:100%">Image placeholder</div>
+          <div style="padding:14px">
+            <div class="wf-text" style="width:60px;height:8px;background:#bbb;margin-bottom:8px"></div>
+            <div class="wf-text" style="width:90%"></div>
+            <div class="wf-text" style="width:80%"></div>
+            <div class="wf-text" style="width:70%"></div>
+            <div class="mt-2"><span class="wf-btn-outline" style="font-size:11px">Read more →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="contact.html" class="wf-btn-outline">View All News →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT CTA -->
+<div class="section-label">Section — Contact CTA</div>
+<section style="padding:40px 0">
+  <div class="container text-center">
+    <div class="wf-heading">Ready to Get Tested?</div>
+    <div class="wf-subhead">Contact us for an individual quote or to schedule a consultation.</div>
+    <div class="d-flex justify-content-center gap-3 flex-wrap mt-3">
+      <a href="contact.html" class="wf-btn">[ Submit a Request ]</a>
+      <a href="about.html"   class="wf-btn-outline">[ Learn About the Lab ]</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<div class="section-label">Footer</div>
+<footer id="footer">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-lg-4">
+        <div style="font-weight:bold; font-size:16px; margin-bottom:6px">ECOLAB</div>
+        <div class="wf-text" style="width:200px"></div>
+        <div class="wf-text" style="width:140px; margin-top:4px"></div>
+        <div class="wf-text" style="width:160px; margin-top:8px; background:#aaa"></div>
+      </div>
+      <div class="col-lg-4">
+        <div style="font-weight:bold; margin-bottom:8px">Navigation</div>
+        <a href="index.html"    class="d-block wf-nav-link mb-1">Home</a>
+        <a href="about.html"    class="d-block wf-nav-link mb-1">About</a>
+        <a href="services.html" class="d-block wf-nav-link mb-1">Services</a>
+        <a href="contact.html"  class="d-block wf-nav-link mb-1">Contact</a>
+      </div>
+      <div class="col-lg-4">
+        <div style="font-weight:bold; margin-bottom:6px">Supported by</div>
+        <div class="wf-text"></div>
+        <div class="wf-text" style="width:85%"></div>
+        <div class="wf-text" style="width:70%"></div>
+      </div>
+    </div>
+    <hr class="wf-divider" style="margin-top:24px">
+    <div class="wf-notice" style="font-size:11px">Disclaimer text / Copyright © 2025 EKO LAB</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
