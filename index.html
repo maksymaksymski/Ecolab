@@ -3,218 +3,567 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EKO LAB — Wireframe: Home</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>EKO LAB — Home</title>
   <style>
-    * { box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: #f0f0f0; color: #333; font-size: 14px; }
+    /* ─── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+    body { font-family: Arial, Helvetica, sans-serif; background: #ebebeb; color: #1e1e1e; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
 
-    .wf-box        { background: #d4d4d4; border: 1px solid #aaa; }
-    .wf-box-dark   { background: #999;    border: 1px solid #777; }
-    .wf-box-light  { background: #e8e8e8; border: 1px solid #bbb; }
-    .wf-label      { color: #555; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .wf-heading    { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 6px; }
-    .wf-subhead    { font-size: 13px; color: #666; margin-bottom: 12px; }
-    .wf-text       { background: #ccc; height: 10px; border-radius: 2px; margin-bottom: 6px; }
-    .wf-btn        { display: inline-block; background: #888; color: #fff; padding: 6px 16px; font-size: 12px; border: none; cursor: pointer; text-decoration: none; }
-    .wf-btn:hover  { background: #666; color: #fff; }
-    .wf-btn-outline{ display: inline-block; background: transparent; color: #666; padding: 6px 16px; font-size: 12px; border: 1px solid #888; cursor: pointer; text-decoration: none; }
-    .wf-btn-outline:hover { background: #e0e0e0; color: #333; }
-    .wf-img        { background: #c0c0c0; border: 1px solid #aaa; display: flex; align-items: center; justify-content: center; color: #777; font-size: 11px; }
-    .wf-badge      { display: inline-block; background: #bbb; color: #555; padding: 2px 10px; font-size: 11px; border-radius: 2px; margin: 2px; }
-    .wf-notice     { border: 1px dashed #aaa; background: #e4e4e4; padding: 8px 12px; color: #777; font-size: 12px; font-style: italic; }
-    .wf-divider    { border: none; border-top: 1px solid #bbb; margin: 12px 0; }
-    .wf-card       { background: #ddd; border: 1px solid #bbb; padding: 16px; height: 100%; }
-    .wf-card-dark  { background: #c4c4c4; border: 1px solid #aaa; padding: 16px; height: 100%; }
-    .wf-avatar     { width: 56px; height: 56px; border-radius: 50%; background: #aaa; border: 1px solid #999; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 11px; }
-    .wf-input      { width: 100%; background: #e0e0e0; border: 1px solid #bbb; padding: 8px 10px; margin-bottom: 10px; color: #555; font-size: 13px; }
-    textarea.wf-input { height: 80px; resize: none; }
-    .wf-map        { background: #c8c8c8; border: 1px solid #aaa; display: flex; align-items: center; justify-content: center; color: #777; font-size: 12px; }
+    /* ─── DESIGN TOKENS ──────────────────────────────────── */
+    :root {
+      --scale-rem: max(0.5rem, min(1rem, calc(0.5rem + 5 * ((100vw - 720px) / 720))));
+      --t10: calc(var(--scale-rem) * 10);
+      --t71: calc(var(--scale-rem) * 7.1);
+      --t56: calc(var(--scale-rem) * 5.6);
+      --t42: calc(var(--scale-rem) * 4.2);
+      --t36: calc(var(--scale-rem) * 3.6);
+      --t28: calc(var(--scale-rem) * 2.8);
+      --t22: calc(var(--scale-rem) * 2.2);
+      --t18: calc(var(--scale-rem) * 1.8);
+      --t15: calc(var(--scale-rem) * 1.5);
+      --t13: calc(var(--scale-rem) * 1.3);
 
-    section        { padding: 48px 0; background: #ebebeb; border-bottom: 2px solid #ccc; }
-    section.alt    { background: #e0e0e0; }
-    section.dark   { background: #c8c8c8; }
+      --bg-light: #ebebeb;
+      --bg-grey:  #e0e0e0;
+      --bg-dark:  #1e1e1e;
+      --c-mid:    #999;
+      --c-stroke: #bbb;
+      --c-muted:  #777;
+      --c-light:  #f2f2f2;
 
-    #header        { background: #ddd; border-bottom: 2px solid #aaa; padding: 10px 0; position: sticky; top: 0; z-index: 100; }
-    .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #888; background: #d8d8d8; border-bottom: 1px solid #ccc; padding: 4px 0; text-align: center; }
-    .wf-nav-link   { color: #555; font-size: 12px; padding: 4px 8px; text-decoration: none; }
-    .wf-nav-link:hover { color: #222; }
-    .nav-active    { color: #222 !important; font-weight: bold; border-bottom: 1px solid #555; }
+      --pad-h: max(24px, min(44px, calc(24px + 20 * ((100vw - 720px) / 720))));
+      --gap: 24px;
+    }
 
-    #footer        { background: #ccc; border-top: 2px solid #aaa; padding: 32px 0 16px; }
+    /* ─── SECTION THEMES ────────────────────────────────── */
+    .ui-light { background: var(--bg-light); color: var(--bg-dark); }
+    .ui-grey  { background: var(--bg-grey);  color: var(--bg-dark); }
+    .ui-dark  { background: var(--bg-dark);  color: var(--c-light); }
+
+    /* ─── CONTAINER + GRID ───────────────────────────────── */
+    .container-h {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 var(--pad-h);
+    }
+    .grid { display: flex; flex-wrap: wrap; gap: var(--gap); }
+    .col-3  { width: calc(25%     - var(--gap) * 3/4); }
+    .col-4  { width: calc(33.333% - var(--gap) * 2/3); }
+    .col-6  { width: calc(50%     - var(--gap) * 1/2); }
+    .col-9  { width: calc(75%     - var(--gap) * 1/4); }
+    .col-12 { width: 100%; }
+    .offset-3 { margin-left: calc(25% + var(--gap) / 4); }
+    .offset-6 { margin-left: calc(50% + var(--gap) / 2); }
+    @media (max-width: 900px) {
+      .col-3, .col-4, .col-6, .col-9 { width: 100%; }
+      .offset-3, .offset-6 { margin-left: 0; }
+    }
+    @media (min-width: 600px) and (max-width: 900px) {
+      .col-4 { width: calc(50% - var(--gap) / 2); }
+      .col-3 { width: calc(50% - var(--gap) / 2); }
+    }
+
+    /* ─── TYPOGRAPHY ─────────────────────────────────────── */
+    .t-display { font-size: var(--t10); font-weight: 700; letter-spacing: -0.06em; line-height: 0.88em; }
+    .t-section { font-size: var(--t71); font-weight: 700; letter-spacing: -0.06em; line-height: 0.9em; }
+    .t-large   { font-size: var(--t56); font-weight: 700; letter-spacing: -0.06em; line-height: 0.9em; }
+    .t-h3      { font-size: var(--t42); font-weight: 700; letter-spacing: -0.06em; line-height: 0.92em; }
+    .t-h5      { font-size: var(--t36); font-weight: 700; letter-spacing: -0.06em; line-height: 0.95em; }
+    .t-lead    { font-size: var(--t28); font-weight: 700; letter-spacing: -0.04em; line-height: 1em; }
+    .t-lead-sm { font-size: var(--t22); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1em; }
+    .t-body    { font-size: var(--t18); font-weight: 400; letter-spacing: -0.01em; line-height: 1.2em; }
+    .t-label   { font-size: var(--t15); font-weight: 400; letter-spacing: 0.02em; line-height: 1.3em; }
+    .t-small   { font-size: var(--t13); font-weight: 400; letter-spacing: 0.01em; line-height: 1.4em; }
+
+    /* ─── WIREFRAME PLACEHOLDERS ────────────────────────── */
+    .wf-text { background: #ccc; height: 10px; border-radius: 2px; margin-bottom: 6px; display: block; }
+    .wf-box  { background: #d4d4d4; border: 1px solid #aaa; }
+    .wf-img  { background: #c0c0c0; border: 1px solid #aaa; display: flex; align-items: center; justify-content: center; color: #777; font-size: 11px; }
+    .wf-badge { display: inline-block; background: #bbb; color: #555; padding: 3px 12px; font-size: 11px; border-radius: 2px; margin: 3px; }
+    .wf-notice { border: 1px dashed #aaa; background: #e4e4e4; padding: 8px 12px; color: #777; font-size: 12px; font-style: italic; }
+    .wf-avatar { border-radius: 50%; background: #aaa; border: 1px solid #999; display: flex; align-items: center; justify-content: center; color: #666; font-size: 11px; }
+
+    /* ─── HEADER ─────────────────────────────────────────── */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      background: rgba(235,235,235,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--c-stroke);
+      padding: 14px var(--pad-h);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .header-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 16px; color: #333;
+    }
+    .header-logo-mark {
+      width: 32px; height: 32px; border: 1px solid #aaa; background: #d4d4d4;
+      display: flex; align-items: center; justify-content: center; font-size: 9px; color: #777;
+    }
+    .header-nav { display: flex; gap: 4px; }
+    .header-nav a {
+      font-size: 13px; color: #555; padding: 5px 10px;
+      border-bottom: 1px solid transparent; transition: color 0.2s;
+    }
+    .header-nav a:hover, .header-nav a.active { color: #1e1e1e; border-bottom-color: #555; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .header-phone { font-size: 12px; color: #555; }
+    .menu-pill {
+      background: #1e1e1e; color: #f2f2f2;
+      border: none; cursor: pointer;
+      padding: 8px 20px; border-radius: 100px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+      transition: background 0.2s;
+    }
+    .menu-pill:hover { background: #444; }
+    .lang-switch {
+      font-size: 11px; color: #555; padding: 4px 8px;
+      border: 1px solid #bbb; background: transparent;
+    }
+    @media (max-width: 768px) {
+      .header-nav { display: none; }
+      .header-phone { display: none; }
+    }
+
+    /* ─── FULLSCREEN NAV OVERLAY ─────────────────────────── */
+    .nav-overlay {
+      position: fixed; inset: 0; z-index: 950;
+      background: var(--bg-dark);
+      display: flex; flex-direction: column;
+      padding: 80px var(--pad-h) 60px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .nav-overlay.open { opacity: 1; pointer-events: all; }
+    .nav-overlay-close {
+      position: absolute; top: 18px; right: var(--pad-h);
+      background: #333; color: #f2f2f2; border: none; cursor: pointer;
+      padding: 8px 20px; border-radius: 100px; font-size: 12px;
+    }
+    .nav-overlay-links { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+    .nav-overlay-links a {
+      font-size: var(--t42); font-weight: 700; letter-spacing: -0.05em;
+      color: #555; transition: color 0.2s;
+      border-bottom: 1px solid #333; padding-bottom: 16px;
+    }
+    .nav-overlay-links a:hover { color: var(--c-light); }
+    .nav-overlay-links a.active { color: var(--c-light); }
+    .nav-overlay-footer {
+      font-size: 12px; color: #555;
+      display: flex; gap: 24px; align-items: center;
+    }
+
+    /* ─── GEOMETRIC PRIMITIVES ───────────────────────────── */
+
+    /* P1: Parallelogram band */
+    .para-band {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 64px;
+      pointer-events: none;
+    }
+    .para-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #d0d0d0;
+      clip-path: polygon(0 0, 100% 25%, 100% 100%, 0 75%);
+    }
+    .para-band.dark::before { background: #2a2a2a; }
+    .para-band.inv { height: 56px; }
+    .para-band.inv::before { clip-path: polygon(0 25%, 100% 0, 100% 75%, 0 100%); }
+
+    /* P2: SVG line bars (inline component) */
+    .line-bars-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* P3: Diamond/chevron outlines */
+    .diamond-deco {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.18;
+    }
+
+    /* ─── SECTION BASE ───────────────────────────────────── */
+    .section { padding: 100px 0; position: relative; overflow: hidden; }
+    .section-sm { padding: 64px 0; position: relative; overflow: hidden; }
+    .section-label-strip {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+      color: #888; background: #d8d8d8; border-bottom: 1px solid #ccc;
+      padding: 4px 0; text-align: center;
+    }
+
+    /* ─── HERO S0 ────────────────────────────────────────── */
+    .hero-wrap { height: 400vh; }
+    .hero-inner {
+      position: sticky; top: 0; height: 100vh; overflow: hidden;
+      background: var(--bg-dark); color: var(--c-light);
+      display: flex; flex-direction: column;
+    }
+    .hero-top-bar {
+      padding: 80px var(--pad-h) 0;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 16px;
+    }
+    .hero-donors { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .hero-donor-badge {
+      border: 1px solid #444;
+      padding: 5px 14px;
+      font-size: 11px; color: #888;
+      letter-spacing: 0.04em;
+    }
+    .hero-tagline { font-size: 11px; color: #555; max-width: 200px; text-align: right; }
+    .hero-main {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 var(--pad-h) 60px;
+    }
+    .hero-h1 {
+      font-size: var(--t10);
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      line-height: 0.88em;
+      color: var(--c-light);
+      max-width: 1100px;
+      overflow: hidden;
+    }
+    .hero-h1 .word { display: inline-block; transform: translateY(110%); opacity: 0; }
+    .hero-sub {
+      margin-top: 32px;
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-subtitle {
+      font-size: var(--t28); font-weight: 400; letter-spacing: -0.03em;
+      color: #888; max-width: 600px; line-height: 1em;
+    }
+    .hero-ctas { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .btn-pill-light {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--c-light); color: var(--bg-dark);
+      padding: 12px 28px; border-radius: 100px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+      transition: background 0.2s;
+    }
+    .btn-pill-light:hover { background: #ddd; }
+    .btn-outline-light {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid #444; color: #bbb;
+      padding: 12px 28px; border-radius: 100px;
+      font-size: 13px; letter-spacing: 0.02em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline-light:hover { border-color: #999; color: #eee; }
+    .hero-scroll-hint {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #444;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .hero-scroll-arrow { width: 1px; height: 32px; background: #333; }
+
+    /* ─── TRUST STRIP ─────────────────────────────────────── */
+    .trust-strip {
+      background: #d8d8d8; border-top: 1px solid var(--c-stroke); border-bottom: 1px solid var(--c-stroke);
+      padding: 14px var(--pad-h);
+      display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;
+    }
+
+    /* ─── S1 WHY ASBESTOS ──────────────────────────────────── */
+    .s1-heading-col { padding-bottom: 40px; }
+    .eyebrow {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--c-muted); margin-bottom: 16px; display: block;
+    }
+    .ui-dark .eyebrow { color: #555; }
+
+    /* ─── S4 STATS ────────────────────────────────────────── */
+    .stat-item { flex: 1; min-width: 180px; }
+    .stat-num {
+      font-size: var(--t71); font-weight: 700; letter-spacing: -0.06em;
+      line-height: 0.9em; color: var(--c-light);
+      display: block;
+    }
+    .stat-label { font-size: var(--t13); color: #666; margin-top: 8px; display: block; }
+    .stat-divider { width: 1px; background: #2a2a2a; align-self: stretch; flex-shrink: 0; }
+
+    /* ─── WAVEFORM SVG ──────────────────────────────────────── */
+    .waveform-wrap {
+      width: 100%; overflow: hidden;
+      height: 160px; display: flex; align-items: flex-end;
+    }
+    .waveform-wrap svg { width: 100%; height: 100%; }
+
+    /* ─── NEWS CARDS ────────────────────────────────────────── */
+    .news-card { border: 1px solid var(--c-stroke); background: #e8e8e8; overflow: hidden; }
+    .news-card-img { background: #c0c0c0; border-bottom: 1px solid #bbb; display: flex; align-items: center; justify-content: center; color: #888; font-size: 11px; }
+    .news-card-body { padding: 20px 24px 24px; }
+    .news-date { font-size: 11px; color: var(--c-muted); letter-spacing: 0.05em; margin-bottom: 10px; display: block; }
+
+    /* ─── CTA CIRCLE S9 ──────────────────────────────────────── */
+    .cta-section-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .cta-muted-text {
+      font-size: var(--t71); font-weight: 700; letter-spacing: -0.06em;
+      line-height: 0.9em; color: #ccc; flex: 1; min-width: 300px;
+    }
+    .cta-circle-btn {
+      width: 176px; height: 176px; border-radius: 50%;
+      border: 1px solid #aaa; background: transparent;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; cursor: pointer; flex-shrink: 0;
+      transition: background 0.3s, border-color 0.3s;
+      text-decoration: none; color: #555;
+    }
+    .cta-circle-btn:hover { background: #1e1e1e; border-color: #1e1e1e; color: #f2f2f2; }
+    .cta-circle-arrow { font-size: 28px; line-height: 1; }
+    .cta-circle-label { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    .site-footer {
+      background: #d0d0d0; border-top: 1px solid #bbb;
+      padding: 60px var(--pad-h) 32px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+      padding-bottom: 40px; border-bottom: 1px solid #bbb;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    .footer-nav-link { display: block; font-size: 13px; color: #555; padding: 4px 0; }
+    .footer-nav-link:hover { color: #1e1e1e; }
+    .footer-meta { font-size: 11px; color: #888; }
+
+    /* ─── REVEAL ANIMATION BASE ────────────────────────────── */
+    .reveal-up { overflow: hidden; }
+    .reveal-up .inner { transform: translateY(60px); opacity: 0; }
+    .reveal-fade { opacity: 0; transform: translateY(20px); }
   </style>
 </head>
 <body>
 
+<!-- NAV OVERLAY -->
+<div class="nav-overlay" id="navOverlay">
+  <button class="nav-overlay-close" id="navClose">Close ✕</button>
+  <nav class="nav-overlay-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="nav-overlay-footer">
+    <span>📞 +380 67 605 09 01</span>
+    <span>ekocenter@ukr.net</span>
+  </div>
+</div>
+
 <!-- HEADER -->
-<div class="section-label">Header (sticky)</div>
-<header id="header">
-  <div class="container">
-    <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
-      <a href="index.html" class="wf-box d-flex align-items-center gap-2 text-decoration-none" style="padding:6px 12px">
-        <div class="wf-img" style="width:32px;height:32px;font-size:9px">LOGO</div>
-        <span style="font-weight:bold; font-size:15px; color:#555">ECOLAB</span>
-      </a>
-      <div class="d-none d-lg-flex gap-1 flex-wrap">
-        <a href="index.html"    class="wf-nav-link nav-active">Home</a>
-        <a href="about.html"    class="wf-nav-link">About</a>
-        <a href="services.html" class="wf-nav-link">Services</a>
-      </div>
-      <div class="d-flex align-items-center gap-2 flex-wrap">
-        <span style="font-size:12px; color:#555">📞 +380 67 605 09 01</span>
-        <a href="contact.html" class="wf-btn">Get in Touch</a>
-        <span class="wf-box" style="padding:3px 8px; font-size:11px; color:#555">UA | EN</span>
-      </div>
-    </div>
+<header class="site-header">
+  <a href="index.html" class="header-logo">
+    <div class="header-logo-mark">LOGO</div>
+    ECOLAB
+  </a>
+  <nav class="header-nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+  </nav>
+  <div class="header-right">
+    <span class="header-phone">+380 67 605 09 01</span>
+    <span class="lang-switch">UA | EN</span>
+    <button class="menu-pill" id="menuBtn">Menu</button>
   </div>
 </header>
 
 
-<!-- HERO -->
-<div class="section-label">Section — Hero</div>
-<section class="dark" style="padding:64px 0">
-  <div class="container text-center">
-    <div class="wf-label mb-2">Donor logos (4 placeholders)</div>
-    <div class="d-flex justify-content-center gap-3 flex-wrap mb-4">
-      <div class="wf-box" style="padding:10px 18px; min-width:110px; font-size:11px; color:#666">Swiss Confederation</div>
-      <div class="wf-box" style="padding:10px 18px; min-width:110px; font-size:11px; color:#666">World Bank</div>
-      <div class="wf-box" style="padding:10px 18px; min-width:110px; font-size:11px; color:#666">Enabel</div>
-      <div class="wf-box" style="padding:10px 18px; min-width:110px; font-size:11px; color:#666">Amiens Métropole</div>
-    </div>
-    <div class="wf-box-dark mx-auto mb-2" style="height:36px; max-width:680px; display:flex; align-items:center; justify-content:center; color:#555; font-size:13px">H1 — Ukraine's Charitable Foundation Expert Centre for Asbestos Detection</div>
-    <div class="wf-box mx-auto mb-4" style="height:20px; max-width:500px; display:flex; align-items:center; justify-content:center; color:#666; font-size:11px">Subheadline — Independent testing. ISO-compliant methods.</div>
-    <div class="d-flex justify-content-center gap-3 flex-wrap">
-      <a href="contact.html" class="wf-btn">[ Submit a Request ]</a>
-      <a href="about.html"   class="wf-btn-outline">[ Learn More ]</a>
-    </div>
-  </div>
-</section>
+<!-- ── S0: HERO ─────────────────────────────────────────────── -->
+<div class="hero-wrap">
+  <div class="hero-inner">
 
-<!-- TRUST STRIP -->
-<div style="background:#ddd; border-top:1px solid #bbb; border-bottom:1px solid #bbb; padding:10px 0;">
-  <div class="container">
-    <div class="d-flex align-items-center justify-content-center gap-4 flex-wrap">
-      <span class="wf-badge">✓ Accredited Laboratory</span>
-      <span class="wf-badge">✓ DSTU ISO 10012:2005</span>
-      <span class="wf-badge">✓ ISO-compliant methods</span>
-      <a href="contact.html" class="wf-btn-outline" style="font-size:11px">[ View Documents → ]</a>
+    <!-- SVG line bars decoration -->
+    <div class="line-bars-wrap" aria-hidden="true">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.04"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- 2px vertical bars with diagonal stagger -->
+        <rect x="8%"  y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="16%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="24%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="32%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="40%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="48%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="56%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="64%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="72%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="80%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="88%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+        <rect x="96%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+      </svg>
     </div>
+
+    <!-- Diamond outline decoration -->
+    <svg class="diamond-deco" style="right:-60px;top:15%;width:300px;height:300px;" viewBox="0 0 100 100" aria-hidden="true">
+      <polygon points="50,2 98,50 50,98 2,50" fill="none" stroke="#555" stroke-width="0.5"/>
+      <polygon points="50,12 88,50 50,88 12,50" fill="none" stroke="#444" stroke-width="0.3"/>
+    </svg>
+
+    <div class="hero-top-bar">
+      <div class="hero-donors">
+        <div class="hero-donor-badge">Swiss Confederation</div>
+        <div class="hero-donor-badge">World Bank</div>
+        <div class="hero-donor-badge">Enabel</div>
+        <div class="hero-donor-badge">Amiens Métropole</div>
+      </div>
+      <div class="hero-tagline">ISO-compliant asbestos testing laboratory, Ukraine</div>
+    </div>
+
+    <div class="hero-main">
+      <h1 class="hero-h1" id="heroH1">
+        <span class="word">Ukraine's</span>
+        <span class="word"> Expert</span>
+        <span class="word"> Centre</span>
+        <span class="word"> for</span>
+        <span class="word"> Asbestos</span>
+        <span class="word"> Detection</span>
+      </h1>
+      <div class="hero-sub">
+        <p class="hero-subtitle">Independent testing.<br>ISO-compliant methods.</p>
+        <div class="hero-ctas">
+          <a href="contact.html" class="btn-pill-light">Submit a Request →</a>
+          <a href="about.html"   class="btn-outline-light">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero-scroll-arrow"></div>
+    </div>
+
   </div>
 </div>
 
 
-<!-- WHY ASBESTOS MATTERS -->
-<div class="section-label">Section — Why Asbestos Testing Matters</div>
-<section>
-  <div class="container">
-    <div class="wf-heading">Why Asbestos Testing Matters</div>
-    <div class="wf-subhead">Section subtitle</div>
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="wf-card">
-          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
-          <div style="font-weight:bold; margin-bottom:6px">Health Risk</div>
-          <div class="wf-text"></div>
-          <div class="wf-text" style="width:80%"></div>
-          <div class="wf-text" style="width:60%"></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="wf-card">
-          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
-          <div style="font-weight:bold; margin-bottom:6px">Legal Requirements</div>
-          <div class="wf-text"></div>
-          <div class="wf-text" style="width:75%"></div>
-          <div class="wf-text" style="width:55%"></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="wf-card">
-          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
-          <div style="font-weight:bold; margin-bottom:6px">Cannot Be Identified Visually</div>
-          <div class="wf-text"></div>
-          <div class="wf-text" style="width:85%"></div>
-          <div class="wf-text" style="width:65%"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- SERVICES PREVIEW (3 cards) -->
-<div class="section-label">Section — Services Preview (3 of 5)</div>
-<section class="alt">
-  <div class="container">
-    <div class="wf-heading">Our Services</div>
-    <div class="wf-subhead">Overview — <a href="services.html" class="wf-btn-outline" style="font-size:11px">View All Services →</a></div>
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="wf-card">
-          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
-          <div style="font-weight:bold; margin-bottom:4px">Asbestos Testing</div>
-          <div class="wf-text"></div>
-          <div class="wf-text" style="width:80%"></div>
-          <div class="wf-text" style="width:60%; background:#bbb; margin-top:4px"></div>
-          <div class="mt-3"><a href="services.html" class="wf-btn" style="font-size:11px">[ Request this service ]</a></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="wf-card">
-          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
-          <div style="font-weight:bold; margin-bottom:4px">Sampling</div>
-          <div class="wf-text"></div>
-          <div class="wf-text" style="width:75%"></div>
-          <div class="wf-text" style="width:55%; background:#bbb; margin-top:4px"></div>
-          <div class="mt-3"><a href="services.html" class="wf-btn" style="font-size:11px">[ Request this service ]</a></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="wf-card">
-          <div class="wf-box mb-2" style="width:36px;height:36px"></div>
-          <div style="font-weight:bold; margin-bottom:4px">Consulting & Training</div>
-          <div class="wf-text"></div>
-          <div class="wf-text" style="width:80%"></div>
-          <div class="wf-text" style="width:60%; background:#bbb; margin-top:4px"></div>
-          <div class="mt-3"><a href="services.html" class="wf-btn" style="font-size:11px">[ Request this service ]</a></div>
-        </div>
-      </div>
-    </div>
-    <div class="text-center mt-4">
-      <a href="services.html" class="wf-btn-outline">View All Services →</a>
-    </div>
-  </div>
-</section>
-
-
 <!-- TRUST STRIP -->
-<div class="section-label">Section — Trust Strip</div>
-<section class="dark" style="padding:32px 0">
-  <div class="container">
-    <div class="wf-label text-center mb-3">Trust signals</div>
-    <div class="d-flex justify-content-center gap-4 flex-wrap text-center">
-      <div>
-        <div class="wf-card-dark" style="padding:14px 24px; min-width:110px">
-          <div style="font-size:22px; font-weight:bold; color:#555">200</div>
-          <div style="font-size:11px; color:#777">samples/month</div>
+<div class="trust-strip">
+  <span class="wf-badge">✓ Accredited Laboratory</span>
+  <span class="wf-badge">✓ DSTU ISO 10012:2005</span>
+  <span class="wf-badge">✓ ISO-compliant methods</span>
+  <a href="about.html" style="font-size:11px;color:#555;border:1px solid #bbb;padding:3px 12px;margin-left:8px">View Documents →</a>
+</div>
+
+
+<!-- ── S1: WHY ASBESTOS MATTERS ─────────────────────────────── -->
+<div class="section-label-strip">Section — Why Asbestos Testing Matters</div>
+<section class="section ui-light">
+  <div class="container-h">
+
+    <!-- Large offset heading -->
+    <div class="grid" style="margin-bottom:60px">
+      <div class="col-6 offset-6 s1-heading-col reveal-fade">
+        <span class="eyebrow">Why It Matters</span>
+        <h2 class="t-section">Why<br>Asbestos<br>Testing<br>Matters</h2>
+      </div>
+    </div>
+
+    <!-- 3 cards -->
+    <div class="grid">
+      <div class="col-4 reveal-fade">
+        <div style="border-top:2px solid #bbb;padding-top:20px">
+          <div class="wf-box" style="width:36px;height:36px;margin-bottom:16px"></div>
+          <div style="font-size:var(--t18);font-weight:700;letter-spacing:-0.03em;margin-bottom:12px">Health Risk</div>
+          <span class="wf-text"></span>
+          <span class="wf-text" style="width:80%"></span>
+          <span class="wf-text" style="width:65%"></span>
         </div>
       </div>
-      <div>
-        <div class="wf-card-dark" style="padding:14px 24px; min-width:110px">
-          <div style="font-size:22px; font-weight:bold; color:#555">4</div>
-          <div style="font-size:11px; color:#777">international donors</div>
+      <div class="col-4 reveal-fade">
+        <div style="border-top:2px solid #bbb;padding-top:20px">
+          <div class="wf-box" style="width:36px;height:36px;margin-bottom:16px"></div>
+          <div style="font-size:var(--t18);font-weight:700;letter-spacing:-0.03em;margin-bottom:12px">Legal Requirements</div>
+          <span class="wf-text"></span>
+          <span class="wf-text" style="width:75%"></span>
+          <span class="wf-text" style="width:55%"></span>
         </div>
       </div>
-      <div>
-        <div class="wf-card-dark" style="padding:14px 24px; min-width:110px">
-          <div style="font-size:22px; font-weight:bold; color:#555">ISO</div>
-          <div style="font-size:11px; color:#777">17025 compliant</div>
+      <div class="col-4 reveal-fade">
+        <div style="border-top:2px solid #bbb;padding-top:20px">
+          <div class="wf-box" style="width:36px;height:36px;margin-bottom:16px"></div>
+          <div style="font-size:var(--t18);font-weight:700;letter-spacing:-0.03em;margin-bottom:12px">Cannot Be Identified Visually</div>
+          <span class="wf-text"></span>
+          <span class="wf-text" style="width:85%"></span>
+          <span class="wf-text" style="width:70%"></span>
         </div>
       </div>
-      <div>
-        <div class="wf-card-dark" style="padding:14px 24px; min-width:110px">
-          <div style="font-size:22px; font-weight:bold; color:#555">5</div>
-          <div style="font-size:11px; color:#777">team specialists</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PARALLELOGRAM BAND SEPARATOR -->
+<div class="para-band" aria-hidden="true"></div>
+
+
+<!-- ── S2: SERVICES PREVIEW ──────────────────────────────────── -->
+<div class="section-label-strip">Section — Services Preview</div>
+<section class="section ui-grey">
+  <div class="container-h">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;gap:16px;flex-wrap:wrap">
+      <h2 class="t-h3 reveal-fade">Our Services</h2>
+      <a href="services.html" style="font-size:13px;color:#555;border:1px solid #bbb;padding:8px 20px;border-radius:100px;transition:background 0.2s" onmouseover="this.style.background='#e0e0e0'" onmouseout="this.style.background='transparent'">View All Services →</a>
+    </div>
+    <div class="grid">
+      <div class="col-4 reveal-fade">
+        <div style="background:#ddd;border:1px solid #bbb;padding:28px;height:100%">
+          <div class="wf-box" style="width:36px;height:36px;margin-bottom:20px"></div>
+          <div style="font-size:var(--t18);font-weight:700;letter-spacing:-0.03em;margin-bottom:12px">Asbestos Testing</div>
+          <span class="wf-text"></span>
+          <span class="wf-text" style="width:80%"></span>
+          <span class="wf-text" style="width:60%;background:#bbb;margin-top:4px"></span>
+          <div style="margin-top:20px">
+            <a href="services.html" style="font-size:12px;color:#555;border-bottom:1px solid #bbb;padding-bottom:2px">Request service →</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 reveal-fade">
+        <div style="background:#ddd;border:1px solid #bbb;padding:28px;height:100%">
+          <div class="wf-box" style="width:36px;height:36px;margin-bottom:20px"></div>
+          <div style="font-size:var(--t18);font-weight:700;letter-spacing:-0.03em;margin-bottom:12px">Sampling</div>
+          <span class="wf-text"></span>
+          <span class="wf-text" style="width:75%"></span>
+          <span class="wf-text" style="width:55%;background:#bbb;margin-top:4px"></span>
+          <div style="margin-top:20px">
+            <a href="services.html" style="font-size:12px;color:#555;border-bottom:1px solid #bbb;padding-bottom:2px">Request service →</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 reveal-fade">
+        <div style="background:#ddd;border:1px solid #bbb;padding:28px;height:100%">
+          <div class="wf-box" style="width:36px;height:36px;margin-bottom:20px"></div>
+          <div style="font-size:var(--t18);font-weight:700;letter-spacing:-0.03em;margin-bottom:12px">Consulting & Training</div>
+          <span class="wf-text"></span>
+          <span class="wf-text" style="width:80%"></span>
+          <span class="wf-text" style="width:60%;background:#bbb;margin-top:4px"></span>
+          <div style="margin-top:20px">
+            <a href="services.html" style="font-size:12px;color:#555;border-bottom:1px solid #bbb;padding-bottom:2px">Request service →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -222,100 +571,292 @@
 </section>
 
 
-<!-- NEWS & EVENTS -->
-<div class="section-label">Section — News & Events</div>
-<section class="alt">
-  <div class="container">
-    <div class="wf-heading">News & Events</div>
-    <div class="wf-notice mb-4">News and announcements will be added after the website launch.</div>
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="wf-card" style="padding:0;overflow:hidden">
-          <div class="wf-img" style="height:140px;width:100%">Image placeholder</div>
-          <div style="padding:14px">
-            <div class="wf-text" style="width:60px;height:8px;background:#bbb;margin-bottom:8px"></div>
-            <div class="wf-text" style="width:90%"></div>
-            <div class="wf-text" style="width:80%"></div>
-            <div class="wf-text" style="width:70%"></div>
-            <div class="mt-2"><span class="wf-btn-outline" style="font-size:11px">Read more →</span></div>
-          </div>
-        </div>
+<!-- PARALLELOGRAM BAND (dark) SEPARATOR -->
+<div class="para-band dark" aria-hidden="true"></div>
+
+
+<!-- ── S4: TRUST STATS ───────────────────────────────────────── -->
+<div class="section-label-strip">Section — Trust Statistics</div>
+<section class="section ui-dark" style="position:relative;overflow:hidden">
+
+  <!-- Diamond decoration -->
+  <svg class="diamond-deco" style="left:-80px;top:50%;transform:translateY(-50%);width:360px;height:360px" viewBox="0 0 100 100" aria-hidden="true">
+    <polygon points="50,2 98,50 50,98 2,50" fill="none" stroke="#333" stroke-width="0.6"/>
+  </svg>
+
+  <div class="container-h">
+    <span class="eyebrow">By the Numbers</span>
+    <div style="display:flex;gap:0;align-items:stretch;flex-wrap:wrap;border-top:1px solid #2a2a2a;margin-top:16px">
+      <div class="stat-item" style="padding:40px 40px 40px 0;border-right:1px solid #2a2a2a">
+        <span class="stat-num" data-count="200">0</span>
+        <span class="stat-label">samples / month</span>
       </div>
-      <div class="col-md-4">
-        <div class="wf-card" style="padding:0;overflow:hidden">
-          <div class="wf-img" style="height:140px;width:100%">Image placeholder</div>
-          <div style="padding:14px">
-            <div class="wf-text" style="width:60px;height:8px;background:#bbb;margin-bottom:8px"></div>
-            <div class="wf-text" style="width:90%"></div>
-            <div class="wf-text" style="width:75%"></div>
-            <div class="wf-text" style="width:65%"></div>
-            <div class="mt-2"><span class="wf-btn-outline" style="font-size:11px">Read more →</span></div>
-          </div>
-        </div>
+      <div class="stat-item" style="padding:40px 40px;border-right:1px solid #2a2a2a">
+        <span class="stat-num" data-count="4">0</span>
+        <span class="stat-label">international donors</span>
       </div>
-      <div class="col-md-4">
-        <div class="wf-card" style="padding:0;overflow:hidden">
-          <div class="wf-img" style="height:140px;width:100%">Image placeholder</div>
-          <div style="padding:14px">
-            <div class="wf-text" style="width:60px;height:8px;background:#bbb;margin-bottom:8px"></div>
-            <div class="wf-text" style="width:90%"></div>
-            <div class="wf-text" style="width:80%"></div>
-            <div class="wf-text" style="width:70%"></div>
-            <div class="mt-2"><span class="wf-btn-outline" style="font-size:11px">Read more →</span></div>
-          </div>
-        </div>
+      <div class="stat-item" style="padding:40px 40px;border-right:1px solid #2a2a2a">
+        <span class="stat-num" style="letter-spacing:-0.04em">ISO</span>
+        <span class="stat-label">17025 compliant</span>
+      </div>
+      <div class="stat-item" style="padding:40px 0 40px 40px">
+        <span class="stat-num" data-count="5">0</span>
+        <span class="stat-label">team specialists</span>
       </div>
     </div>
-    <div class="text-center mt-4">
-      <a href="contact.html" class="wf-btn-outline">View All News →</a>
+
+    <!-- Waveform data viz -->
+    <div class="waveform-wrap" style="margin-top:48px;opacity:0.35" aria-hidden="true">
+      <svg viewBox="0 0 660 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="wfGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- 66 bars, 2px wide, 8px gap, waveform heights -->
+        <rect x="0"   width="2" y="80"  height="80"  fill="url(#wfGrad)"/>
+        <rect x="10"  width="2" y="60"  height="100" fill="url(#wfGrad)"/>
+        <rect x="20"  width="2" y="40"  height="120" fill="url(#wfGrad)"/>
+        <rect x="30"  width="2" y="20"  height="140" fill="url(#wfGrad)"/>
+        <rect x="40"  width="2" y="10"  height="150" fill="url(#wfGrad)"/>
+        <rect x="50"  width="2" y="30"  height="130" fill="url(#wfGrad)"/>
+        <rect x="60"  width="2" y="50"  height="110" fill="url(#wfGrad)"/>
+        <rect x="70"  width="2" y="70"  height="90"  fill="url(#wfGrad)"/>
+        <rect x="80"  width="2" y="90"  height="70"  fill="url(#wfGrad)"/>
+        <rect x="90"  width="2" y="75"  height="85"  fill="url(#wfGrad)"/>
+        <rect x="100" width="2" y="55"  height="105" fill="url(#wfGrad)"/>
+        <rect x="110" width="2" y="35"  height="125" fill="url(#wfGrad)"/>
+        <rect x="120" width="2" y="15"  height="145" fill="url(#wfGrad)"/>
+        <rect x="130" width="2" y="5"   height="155" fill="url(#wfGrad)"/>
+        <rect x="140" width="2" y="25"  height="135" fill="url(#wfGrad)"/>
+        <rect x="150" width="2" y="45"  height="115" fill="url(#wfGrad)"/>
+        <rect x="160" width="2" y="65"  height="95"  fill="url(#wfGrad)"/>
+        <rect x="170" width="2" y="85"  height="75"  fill="url(#wfGrad)"/>
+        <rect x="180" width="2" y="100" height="60"  fill="url(#wfGrad)"/>
+        <rect x="190" width="2" y="80"  height="80"  fill="url(#wfGrad)"/>
+        <rect x="200" width="2" y="60"  height="100" fill="url(#wfGrad)"/>
+        <rect x="210" width="2" y="40"  height="120" fill="url(#wfGrad)"/>
+        <rect x="220" width="2" y="20"  height="140" fill="url(#wfGrad)"/>
+        <rect x="230" width="2" y="10"  height="150" fill="url(#wfGrad)"/>
+        <rect x="240" width="2" y="30"  height="130" fill="url(#wfGrad)"/>
+        <rect x="250" width="2" y="50"  height="110" fill="url(#wfGrad)"/>
+        <rect x="260" width="2" y="70"  height="90"  fill="url(#wfGrad)"/>
+        <rect x="270" width="2" y="90"  height="70"  fill="url(#wfGrad)"/>
+        <rect x="280" width="2" y="110" height="50"  fill="url(#wfGrad)"/>
+        <rect x="290" width="2" y="95"  height="65"  fill="url(#wfGrad)"/>
+        <rect x="300" width="2" y="75"  height="85"  fill="url(#wfGrad)"/>
+        <rect x="310" width="2" y="55"  height="105" fill="url(#wfGrad)"/>
+        <rect x="320" width="2" y="35"  height="125" fill="url(#wfGrad)"/>
+        <rect x="330" width="2" y="15"  height="145" fill="url(#wfGrad)"/>
+        <rect x="340" width="2" y="5"   height="155" fill="url(#wfGrad)"/>
+        <rect x="350" width="2" y="25"  height="135" fill="url(#wfGrad)"/>
+        <rect x="360" width="2" y="45"  height="115" fill="url(#wfGrad)"/>
+        <rect x="370" width="2" y="65"  height="95"  fill="url(#wfGrad)"/>
+        <rect x="380" width="2" y="85"  height="75"  fill="url(#wfGrad)"/>
+        <rect x="390" width="2" y="105" height="55"  fill="url(#wfGrad)"/>
+        <rect x="400" width="2" y="120" height="40"  fill="url(#wfGrad)"/>
+        <rect x="410" width="2" y="100" height="60"  fill="url(#wfGrad)"/>
+        <rect x="420" width="2" y="80"  height="80"  fill="url(#wfGrad)"/>
+        <rect x="430" width="2" y="60"  height="100" fill="url(#wfGrad)"/>
+        <rect x="440" width="2" y="40"  height="120" fill="url(#wfGrad)"/>
+        <rect x="450" width="2" y="20"  height="140" fill="url(#wfGrad)"/>
+        <rect x="460" width="2" y="10"  height="150" fill="url(#wfGrad)"/>
+        <rect x="470" width="2" y="30"  height="130" fill="url(#wfGrad)"/>
+        <rect x="480" width="2" y="50"  height="110" fill="url(#wfGrad)"/>
+        <rect x="490" width="2" y="70"  height="90"  fill="url(#wfGrad)"/>
+        <rect x="500" width="2" y="90"  height="70"  fill="url(#wfGrad)"/>
+        <rect x="510" width="2" y="75"  height="85"  fill="url(#wfGrad)"/>
+        <rect x="520" width="2" y="55"  height="105" fill="url(#wfGrad)"/>
+        <rect x="530" width="2" y="35"  height="125" fill="url(#wfGrad)"/>
+        <rect x="540" width="2" y="15"  height="145" fill="url(#wfGrad)"/>
+        <rect x="550" width="2" y="5"   height="155" fill="url(#wfGrad)"/>
+        <rect x="560" width="2" y="25"  height="135" fill="url(#wfGrad)"/>
+        <rect x="570" width="2" y="45"  height="115" fill="url(#wfGrad)"/>
+        <rect x="580" width="2" y="65"  height="95"  fill="url(#wfGrad)"/>
+        <rect x="590" width="2" y="85"  height="75"  fill="url(#wfGrad)"/>
+        <rect x="600" width="2" y="100" height="60"  fill="url(#wfGrad)"/>
+        <rect x="610" width="2" y="80"  height="80"  fill="url(#wfGrad)"/>
+        <rect x="620" width="2" y="60"  height="100" fill="url(#wfGrad)"/>
+        <rect x="630" width="2" y="40"  height="120" fill="url(#wfGrad)"/>
+        <rect x="640" width="2" y="20"  height="140" fill="url(#wfGrad)"/>
+        <rect x="650" width="2" y="10"  height="150" fill="url(#wfGrad)"/>
+        <rect x="660" width="2" y="30"  height="130" fill="url(#wfGrad)"/>
+      </svg>
     </div>
   </div>
 </section>
 
 
-<!-- CONTACT CTA -->
-<div class="section-label">Section — Contact CTA</div>
-<section style="padding:40px 0">
-  <div class="container text-center">
-    <div class="wf-heading">Ready to Get Tested?</div>
-    <div class="wf-subhead">Contact us for an individual quote or to schedule a consultation.</div>
-    <div class="d-flex justify-content-center gap-3 flex-wrap mt-3">
-      <a href="contact.html" class="wf-btn">[ Submit a Request ]</a>
-      <a href="about.html"   class="wf-btn-outline">[ Learn About the Lab ]</a>
+<!-- PARALLELOGRAM BAND (inverted) SEPARATOR -->
+<div class="para-band inv" aria-hidden="true"></div>
+
+
+<!-- ── S5: NEWS & EVENTS ─────────────────────────────────────── -->
+<div class="section-label-strip">Section — News & Events</div>
+<section class="section ui-light">
+  <div class="container-h">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;gap:16px;flex-wrap:wrap">
+      <h2 class="t-h3 reveal-fade">News & Events</h2>
+      <div class="wf-notice" style="max-width:340px">News will be added after the website launch.</div>
+    </div>
+    <div class="grid">
+      <div class="col-4 reveal-fade">
+        <div class="news-card">
+          <div class="news-card-img" style="height:180px">Image placeholder</div>
+          <div class="news-card-body">
+            <span class="news-date">[ Date placeholder ]</span>
+            <span class="wf-text" style="width:90%"></span>
+            <span class="wf-text" style="width:80%"></span>
+            <span class="wf-text" style="width:70%"></span>
+            <div style="margin-top:16px"><a href="#" style="font-size:12px;color:#555;border-bottom:1px solid #bbb;padding-bottom:2px">Read more →</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 reveal-fade">
+        <div class="news-card">
+          <div class="news-card-img" style="height:180px">Image placeholder</div>
+          <div class="news-card-body">
+            <span class="news-date">[ Date placeholder ]</span>
+            <span class="wf-text" style="width:90%"></span>
+            <span class="wf-text" style="width:75%"></span>
+            <span class="wf-text" style="width:65%"></span>
+            <div style="margin-top:16px"><a href="#" style="font-size:12px;color:#555;border-bottom:1px solid #bbb;padding-bottom:2px">Read more →</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 reveal-fade">
+        <div class="news-card">
+          <div class="news-card-img" style="height:180px">Image placeholder</div>
+          <div class="news-card-body">
+            <span class="news-date">[ Date placeholder ]</span>
+            <span class="wf-text" style="width:90%"></span>
+            <span class="wf-text" style="width:80%"></span>
+            <span class="wf-text" style="width:70%"></span>
+            <div style="margin-top:16px"><a href="#" style="font-size:12px;color:#555;border-bottom:1px solid #bbb;padding-bottom:2px">Read more →</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── S9: CTA ───────────────────────────────────────────────── -->
+<div class="section-label-strip">Section — Contact CTA</div>
+<section class="section-sm ui-grey" style="border-top:1px solid #ccc">
+  <div class="container-h">
+    <div class="cta-section-inner">
+      <div class="cta-muted-text reveal-fade">Ready<br>to Get<br>Tested?</div>
+      <a href="contact.html" class="cta-circle-btn">
+        <span class="cta-circle-arrow">↗</span>
+        <span class="cta-circle-label">Submit a<br>Request</span>
+      </a>
+    </div>
+    <div style="margin-top:40px;padding-top:40px;border-top:1px solid #ccc">
+      <p style="font-size:var(--t13);color:var(--c-muted)">Contact us for an individual quote or to schedule a consultation.</p>
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <a href="contact.html" style="display:inline-block;background:#1e1e1e;color:#f2f2f2;padding:12px 28px;border-radius:100px;font-size:13px;font-weight:600">Submit a Request</a>
+        <a href="about.html"   style="display:inline-block;border:1px solid #aaa;color:#555;padding:12px 28px;border-radius:100px;font-size:13px">Learn About the Lab</a>
+      </div>
     </div>
   </div>
 </section>
 
 
 <!-- FOOTER -->
-<div class="section-label">Footer</div>
-<footer id="footer">
-  <div class="container">
-    <div class="row g-3">
-      <div class="col-lg-4">
-        <div style="font-weight:bold; font-size:16px; margin-bottom:6px">ECOLAB</div>
-        <div class="wf-text" style="width:200px"></div>
-        <div class="wf-text" style="width:140px; margin-top:4px"></div>
-        <div class="wf-text" style="width:160px; margin-top:8px; background:#aaa"></div>
-      </div>
-      <div class="col-lg-4">
-        <div style="font-weight:bold; margin-bottom:8px">Navigation</div>
-        <a href="index.html"    class="d-block wf-nav-link mb-1">Home</a>
-        <a href="about.html"    class="d-block wf-nav-link mb-1">About</a>
-        <a href="services.html" class="d-block wf-nav-link mb-1">Services</a>
-      </div>
-      <div class="col-lg-4">
-        <div style="font-weight:bold; margin-bottom:6px">Supported by</div>
-        <div class="wf-text"></div>
-        <div class="wf-text" style="width:85%"></div>
-        <div class="wf-text" style="width:70%"></div>
-      </div>
+<div class="section-label-strip">Footer</div>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div style="font-weight:700;font-size:18px;letter-spacing:-0.02em;margin-bottom:12px">ECOLAB</div>
+      <span class="wf-text" style="max-width:220px;display:block"></span>
+      <span class="wf-text" style="max-width:160px;display:block;margin-top:4px"></span>
+      <span class="wf-text" style="max-width:180px;display:block;margin-top:10px;background:#aaa"></span>
     </div>
-    <hr class="wf-divider" style="margin-top:24px">
-    <div class="wf-notice" style="font-size:11px">Disclaimer text / Copyright © 2025 EKO LAB</div>
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:12px">Navigation</div>
+      <a href="index.html"    class="footer-nav-link">Home</a>
+      <a href="about.html"    class="footer-nav-link">About</a>
+      <a href="services.html" class="footer-nav-link">Services</a>
+      <a href="contact.html"  class="footer-nav-link">Contact</a>
+    </div>
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:12px">Supported by</div>
+      <span class="wf-text" style="display:block"></span>
+      <span class="wf-text" style="display:block;width:85%"></span>
+      <span class="wf-text" style="display:block;width:70%"></span>
+    </div>
   </div>
+  <div class="footer-meta">Disclaimer text / Copyright © 2025 EKO LAB</div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ── SCRIPTS ────────────────────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+  /* ── Lenis smooth scroll ── */
+  const lenis = new Lenis({ lerp: 0.08, smooth: true });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  /* ── Menu overlay ── */
+  const menuBtn   = document.getElementById('menuBtn');
+  const navClose  = document.getElementById('navClose');
+  const navOverlay = document.getElementById('navOverlay');
+  menuBtn.addEventListener('click',  () => navOverlay.classList.add('open'));
+  navClose.addEventListener('click', () => navOverlay.classList.remove('open'));
+
+  /* ── Hero word reveal ── */
+  gsap.to('#heroH1 .word', {
+    translateY: 0, opacity: 1,
+    duration: 0.8, ease: 'power3.out',
+    stagger: 0.07, delay: 0.3
+  });
+
+  /* ── Section reveal on scroll ── */
+  gsap.utils.toArray('.reveal-fade').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* ── Animated counters ── */
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-count'));
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 80%',
+      onEnter: () => {
+        gsap.to({ val: 0 }, {
+          val: target, duration: 1.4, ease: 'power2.out',
+          onUpdate: function() { el.textContent = Math.round(this.targets()[0].val); },
+          onComplete: () => { el.textContent = target; }
+        });
+      },
+      once: true
+    });
+  });
+
+  /* ── Hero parallax on scroll-pin ── */
+  gsap.to('.hero-h1', {
+    opacity: 0, y: -60, ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero-wrap',
+      start: 'top top',
+      end: '25% top',
+      scrub: true
+    }
+  });
+</script>
 </body>
 </html>

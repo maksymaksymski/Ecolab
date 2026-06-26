@@ -3,319 +3,451 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EKO LAB — Wireframe: About</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>EKO LAB — About</title>
   <style>
-    * { box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: #f0f0f0; color: #333; font-size: 14px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+    body { font-family: Arial, Helvetica, sans-serif; background: #ebebeb; color: #1e1e1e; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
 
-    .wf-box        { background: #d4d4d4; border: 1px solid #aaa; }
-    .wf-box-dark   { background: #999;    border: 1px solid #777; }
-    .wf-box-light  { background: #e8e8e8; border: 1px solid #bbb; }
-    .wf-label      { color: #555; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .wf-heading    { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 6px; }
-    .wf-subhead    { font-size: 13px; color: #666; margin-bottom: 12px; }
-    .wf-text       { background: #ccc; height: 10px; border-radius: 2px; margin-bottom: 6px; }
-    .wf-btn        { display: inline-block; background: #888; color: #fff; padding: 6px 16px; font-size: 12px; border: none; cursor: pointer; text-decoration: none; }
-    .wf-btn:hover  { background: #666; color: #fff; }
-    .wf-btn-outline{ display: inline-block; background: transparent; color: #666; padding: 6px 16px; font-size: 12px; border: 1px solid #888; cursor: pointer; text-decoration: none; }
-    .wf-btn-outline:hover { background: #e0e0e0; color: #333; }
-    .wf-img        { background: #c0c0c0; border: 1px solid #aaa; display: flex; align-items: center; justify-content: center; color: #777; font-size: 11px; }
-    .wf-badge      { display: inline-block; background: #bbb; color: #555; padding: 2px 10px; font-size: 11px; border-radius: 2px; margin: 2px; }
-    .wf-notice     { border: 1px dashed #aaa; background: #e4e4e4; padding: 8px 12px; color: #777; font-size: 12px; font-style: italic; }
-    .wf-divider    { border: none; border-top: 1px solid #bbb; margin: 12px 0; }
-    .wf-card       { background: #ddd; border: 1px solid #bbb; padding: 16px; height: 100%; }
-    .wf-card-dark  { background: #c4c4c4; border: 1px solid #aaa; padding: 16px; height: 100%; }
-    .wf-avatar     { width: 56px; height: 56px; border-radius: 50%; background: #aaa; border: 1px solid #999; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 11px; }
+    :root {
+      --scale-rem: max(0.5rem, min(1rem, calc(0.5rem + 5 * ((100vw - 720px) / 720))));
+      --t10: calc(var(--scale-rem) * 10);
+      --t71: calc(var(--scale-rem) * 7.1);
+      --t56: calc(var(--scale-rem) * 5.6);
+      --t42: calc(var(--scale-rem) * 4.2);
+      --t36: calc(var(--scale-rem) * 3.6);
+      --t28: calc(var(--scale-rem) * 2.8);
+      --t22: calc(var(--scale-rem) * 2.2);
+      --t18: calc(var(--scale-rem) * 1.8);
+      --t15: calc(var(--scale-rem) * 1.5);
+      --t13: calc(var(--scale-rem) * 1.3);
+      --bg-light: #ebebeb;
+      --bg-grey:  #e0e0e0;
+      --bg-dark:  #1e1e1e;
+      --c-mid:    #999;
+      --c-stroke: #bbb;
+      --c-muted:  #777;
+      --c-light:  #f2f2f2;
+      --pad-h: max(24px, min(44px, calc(24px + 20 * ((100vw - 720px) / 720))));
+      --gap: 24px;
+    }
+    .ui-light { background: var(--bg-light); color: var(--bg-dark); }
+    .ui-grey  { background: var(--bg-grey);  color: var(--bg-dark); }
+    .ui-dark  { background: var(--bg-dark);  color: var(--c-light); }
 
-    section        { padding: 48px 0; background: #ebebeb; border-bottom: 2px solid #ccc; }
-    section.alt    { background: #e0e0e0; }
-    section.dark   { background: #c8c8c8; }
+    .container-h { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--pad-h); }
+    .grid { display: flex; flex-wrap: wrap; gap: var(--gap); }
+    .col-3  { width: calc(25%     - var(--gap) * 3/4); }
+    .col-4  { width: calc(33.333% - var(--gap) * 2/3); }
+    .col-6  { width: calc(50%     - var(--gap) * 1/2); }
+    .col-7  { width: calc(58.333% - var(--gap) * 5/12); }
+    .col-5  { width: calc(41.667% - var(--gap) * 7/12); }
+    .col-9  { width: calc(75%     - var(--gap) * 1/4); }
+    .col-12 { width: 100%; }
+    .offset-3 { margin-left: calc(25% + var(--gap) / 4); }
+    @media (max-width: 900px) {
+      .col-3, .col-4, .col-5, .col-6, .col-7, .col-9 { width: 100%; }
+      .offset-3 { margin-left: 0; }
+    }
+    @media (min-width: 600px) and (max-width: 900px) {
+      .col-4, .col-3 { width: calc(50% - var(--gap) / 2); }
+    }
 
-    #header        { background: #ddd; border-bottom: 2px solid #aaa; padding: 10px 0; position: sticky; top: 0; z-index: 100; }
-    .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #888; background: #d8d8d8; border-bottom: 1px solid #ccc; padding: 4px 0; text-align: center; }
-    .wf-nav-link   { color: #555; font-size: 12px; padding: 4px 8px; text-decoration: none; }
-    .wf-nav-link:hover { color: #222; }
-    .nav-active    { color: #222 !important; font-weight: bold; border-bottom: 1px solid #555; }
+    .t-section { font-size: var(--t71); font-weight: 700; letter-spacing: -0.06em; line-height: 0.9em; }
+    .t-h3      { font-size: var(--t42); font-weight: 700; letter-spacing: -0.06em; line-height: 0.92em; }
+    .t-h5      { font-size: var(--t36); font-weight: 700; letter-spacing: -0.06em; line-height: 0.95em; }
+    .t-lead-sm { font-size: var(--t22); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1em; }
+    .t-body    { font-size: var(--t18); font-weight: 400; letter-spacing: -0.01em; line-height: 1.2em; }
+    .t-label   { font-size: var(--t15); font-weight: 400; }
+    .t-small   { font-size: var(--t13); font-weight: 400; }
 
-    #footer        { background: #ccc; border-top: 2px solid #aaa; padding: 32px 0 16px; }
+    .wf-text   { background: #ccc; height: 10px; border-radius: 2px; margin-bottom: 6px; display: block; }
+    .wf-box    { background: #d4d4d4; border: 1px solid #aaa; }
+    .wf-img    { background: #c0c0c0; border: 1px solid #aaa; display: flex; align-items: center; justify-content: center; color: #777; font-size: 11px; }
+    .wf-badge  { display: inline-block; background: #bbb; color: #555; padding: 3px 12px; font-size: 11px; border-radius: 2px; margin: 3px; }
+    .wf-notice { border: 1px dashed #aaa; background: #e4e4e4; padding: 8px 12px; color: #777; font-size: 12px; font-style: italic; }
+    .wf-avatar { border-radius: 50%; background: #aaa; border: 1px solid #999; display: flex; align-items: center; justify-content: center; color: #666; font-size: 11px; }
+
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      background: rgba(235,235,235,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--c-stroke);
+      padding: 14px var(--pad-h);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .header-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; color: #333; }
+    .header-logo-mark { width: 32px; height: 32px; border: 1px solid #aaa; background: #d4d4d4; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #777; }
+    .header-nav { display: flex; gap: 4px; }
+    .header-nav a { font-size: 13px; color: #555; padding: 5px 10px; border-bottom: 1px solid transparent; transition: color 0.2s; }
+    .header-nav a:hover, .header-nav a.active { color: #1e1e1e; border-bottom-color: #555; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .header-phone { font-size: 12px; color: #555; }
+    .menu-pill { background: #1e1e1e; color: #f2f2f2; border: none; cursor: pointer; padding: 8px 20px; border-radius: 100px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; }
+    .lang-switch { font-size: 11px; color: #555; padding: 4px 8px; border: 1px solid #bbb; background: transparent; }
+    @media (max-width: 768px) { .header-nav, .header-phone { display: none; } }
+
+    .nav-overlay {
+      position: fixed; inset: 0; z-index: 950; background: var(--bg-dark);
+      display: flex; flex-direction: column; padding: 80px var(--pad-h) 60px;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .nav-overlay.open { opacity: 1; pointer-events: all; }
+    .nav-overlay-close { position: absolute; top: 18px; right: var(--pad-h); background: #333; color: #f2f2f2; border: none; cursor: pointer; padding: 8px 20px; border-radius: 100px; font-size: 12px; }
+    .nav-overlay-links { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+    .nav-overlay-links a { font-size: var(--t42); font-weight: 700; letter-spacing: -0.05em; color: #555; transition: color 0.2s; border-bottom: 1px solid #333; padding-bottom: 16px; }
+    .nav-overlay-links a:hover, .nav-overlay-links a.active { color: var(--c-light); }
+    .nav-overlay-footer { font-size: 12px; color: #555; display: flex; gap: 24px; }
+
+    .para-band { position: relative; width: 100%; overflow: hidden; height: 64px; pointer-events: none; }
+    .para-band::before { content: ''; position: absolute; inset: 0; background: #d0d0d0; clip-path: polygon(0 0, 100% 25%, 100% 100%, 0 75%); }
+    .para-band.dark::before { background: #2a2a2a; }
+    .para-band.inv::before { clip-path: polygon(0 25%, 100% 0, 100% 75%, 0 100%); }
+    .line-bars-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .diamond-deco { position: absolute; pointer-events: none; opacity: 0.18; }
+
+    .section { padding: 100px 0; position: relative; overflow: hidden; }
+    .section-sm { padding: 64px 0; position: relative; overflow: hidden; }
+    .section-label-strip { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #888; background: #d8d8d8; border-bottom: 1px solid #ccc; padding: 4px 0; text-align: center; }
+    .eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 16px; display: block; }
+    .ui-dark .eyebrow { color: #555; }
+
+    .page-hero {
+      min-height: 60vh; display: flex; flex-direction: column; justify-content: flex-end;
+      padding-top: 120px; position: relative; overflow: hidden;
+    }
+    .page-hero-inner { padding: 60px var(--pad-h) 60px; }
+
+    .stat-num { font-size: var(--t71); font-weight: 700; letter-spacing: -0.06em; line-height: 0.9em; color: var(--c-light); display: block; }
+    .stat-label { font-size: var(--t13); color: #666; margin-top: 8px; display: block; }
+
+    .team-card { border: 1px solid var(--c-stroke); background: #e8e8e8; padding: 24px; text-align: center; }
+    .doc-card { border: 1px solid var(--c-stroke); background: #e8e8e8; padding: 24px; }
+    .donor-card { border: 1px solid var(--c-stroke); background: #e8e8e8; padding: 24px; text-align: center; }
+
+    .cta-muted-text { font-size: var(--t71); font-weight: 700; letter-spacing: -0.06em; line-height: 0.9em; color: #ccc; flex: 1; min-width: 300px; }
+    .cta-circle-btn { width: 176px; height: 176px; border-radius: 50%; border: 1px solid #aaa; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; flex-shrink: 0; transition: background 0.3s, border-color 0.3s; text-decoration: none; color: #555; }
+    .cta-circle-btn:hover { background: #1e1e1e; border-color: #1e1e1e; color: #f2f2f2; }
+
+    .site-footer { background: #d0d0d0; border-top: 1px solid #bbb; padding: 60px var(--pad-h) 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid #bbb; margin-bottom: 24px; }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-nav-link { display: block; font-size: 13px; color: #555; padding: 4px 0; }
+    .footer-nav-link:hover { color: #1e1e1e; }
+    .footer-meta { font-size: 11px; color: #888; }
+
+    .reveal-fade { opacity: 0; transform: translateY(20px); }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="section-label">Header (sticky)</div>
-<header id="header">
-  <div class="container">
-    <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
-      <a href="index.html" class="wf-box d-flex align-items-center gap-2 text-decoration-none" style="padding:6px 12px">
-        <div class="wf-img" style="width:32px;height:32px;font-size:9px">LOGO</div>
-        <span style="font-weight:bold; font-size:15px; color:#555">ECOLAB</span>
-      </a>
-      <div class="d-none d-lg-flex gap-1 flex-wrap">
-        <a href="index.html"    class="wf-nav-link">Home</a>
-        <a href="about.html"    class="wf-nav-link nav-active">About</a>
-        <a href="services.html" class="wf-nav-link">Services</a>
-      </div>
-      <div class="d-flex align-items-center gap-2 flex-wrap">
-        <span style="font-size:12px; color:#555">📞 +380 67 605 09 01</span>
-        <a href="contact.html" class="wf-btn">Get in Touch</a>
-        <span class="wf-box" style="padding:3px 8px; font-size:11px; color:#555">UA | EN</span>
-      </div>
-    </div>
+<div class="nav-overlay" id="navOverlay">
+  <button class="nav-overlay-close" id="navClose">Close ✕</button>
+  <nav class="nav-overlay-links">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="nav-overlay-footer">
+    <span>📞 +380 67 605 09 01</span>
+    <span>ekocenter@ukr.net</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <a href="index.html" class="header-logo">
+    <div class="header-logo-mark">LOGO</div>
+    ECOLAB
+  </a>
+  <nav class="header-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="services.html">Services</a>
+  </nav>
+  <div class="header-right">
+    <span class="header-phone">+380 67 605 09 01</span>
+    <span class="lang-switch">UA | EN</span>
+    <button class="menu-pill" id="menuBtn">Menu</button>
   </div>
 </header>
 
 
-<!-- ABOUT LAB -->
-<div class="section-label">Section — About the Laboratory</div>
-<section>
-  <div class="container">
-    <div class="wf-heading">About the Laboratory</div>
-    <div class="row g-4 mt-1">
+<!-- ── PAGE HERO ──────────────────────────────────────────────── -->
+<div class="page-hero ui-dark">
+  <div class="line-bars-wrap" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs><linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.04"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>
+      <rect x="10%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+      <rect x="20%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+      <rect x="30%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+      <rect x="40%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+      <rect x="50%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+      <rect x="60%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+      <rect x="70%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+      <rect x="80%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+      <rect x="90%" y="0" width="2" height="100%" fill="url(#barGrad)" transform="skewX(-4)"/>
+    </svg>
+  </div>
+  <svg class="diamond-deco" style="right:-40px;top:20%;width:280px;height:280px" viewBox="0 0 100 100" aria-hidden="true">
+    <polygon points="50,2 98,50 50,98 2,50" fill="none" stroke="#555" stroke-width="0.5"/>
+  </svg>
+  <div class="page-hero-inner">
+    <span class="eyebrow">About</span>
+    <h1 class="t-section" style="color:var(--c-light);max-width:900px">About<br>the Laboratory</h1>
+  </div>
+</div>
 
-      <div class="col-lg-5">
-        <div class="wf-text" style="width:70%; height:14px; margin-bottom:10px"></div>
-        <div class="wf-text"></div>
-        <div class="wf-text"></div>
-        <div class="wf-text" style="width:80%"></div>
-        <div class="wf-text"></div>
-        <div class="wf-text" style="width:65%"></div>
-        <div class="mt-3">
-          <a href="services.html" class="wf-btn">[ Learn About Our Services ]</a>
+
+<!-- ── ABOUT LAB ─────────────────────────────────────────────── -->
+<div class="section-label-strip">Section — About the Laboratory</div>
+<section class="section ui-light">
+  <div class="container-h">
+    <div class="grid">
+      <div class="col-5 reveal-fade">
+        <span class="eyebrow">Our Mission</span>
+        <span class="wf-text" style="width:70%;height:14px;margin-bottom:10px"></span>
+        <span class="wf-text"></span>
+        <span class="wf-text"></span>
+        <span class="wf-text" style="width:80%"></span>
+        <span class="wf-text"></span>
+        <span class="wf-text" style="width:65%"></span>
+        <div style="margin-top:28px">
+          <a href="services.html" style="display:inline-block;background:#1e1e1e;color:#f2f2f2;padding:12px 28px;border-radius:100px;font-size:13px;font-weight:600">Learn About Our Services</a>
         </div>
       </div>
-
-      <div class="col-lg-7">
-        <div class="wf-label mb-2">Advantages list (7 items with icons)</div>
-        <div class="row g-2">
-          <div class="col-6">
-            <div class="wf-card-dark d-flex gap-2 align-items-start">
+      <div class="col-7 reveal-fade">
+        <span class="eyebrow">Advantages</span>
+        <div class="grid" style="gap:12px">
+          <div class="col-6" style="min-width:0">
+            <div style="border:1px solid #ccc;background:#e8e8e8;padding:16px;display:flex;gap:12px;align-items:flex-start">
               <div class="wf-box" style="width:20px;height:20px;flex-shrink:0;margin-top:2px"></div>
-              <div><div class="wf-text" style="width:100px;margin-bottom:4px"></div><div class="wf-text" style="width:80px"></div></div>
+              <div><span class="wf-text" style="width:100px;margin-bottom:4px"></span><span class="wf-text" style="width:80px"></span></div>
             </div>
           </div>
-          <div class="col-6">
-            <div class="wf-card-dark d-flex gap-2 align-items-start">
+          <div class="col-6" style="min-width:0">
+            <div style="border:1px solid #ccc;background:#e8e8e8;padding:16px;display:flex;gap:12px;align-items:flex-start">
               <div class="wf-box" style="width:20px;height:20px;flex-shrink:0;margin-top:2px"></div>
-              <div><div class="wf-text" style="width:90px;margin-bottom:4px"></div><div class="wf-text" style="width:70px"></div></div>
+              <div><span class="wf-text" style="width:90px;margin-bottom:4px"></span><span class="wf-text" style="width:70px"></span></div>
             </div>
           </div>
-          <div class="col-6">
-            <div class="wf-card-dark d-flex gap-2 align-items-start">
+          <div class="col-6" style="min-width:0">
+            <div style="border:1px solid #ccc;background:#e8e8e8;padding:16px;display:flex;gap:12px;align-items:flex-start">
               <div class="wf-box" style="width:20px;height:20px;flex-shrink:0;margin-top:2px"></div>
-              <div><div class="wf-text" style="width:110px;margin-bottom:4px"></div><div class="wf-text" style="width:85px"></div></div>
+              <div><span class="wf-text" style="width:110px;margin-bottom:4px"></span><span class="wf-text" style="width:85px"></span></div>
             </div>
           </div>
-          <div class="col-6">
-            <div class="wf-card-dark d-flex gap-2 align-items-start">
+          <div class="col-6" style="min-width:0">
+            <div style="border:1px solid #ccc;background:#e8e8e8;padding:16px;display:flex;gap:12px;align-items:flex-start">
               <div class="wf-box" style="width:20px;height:20px;flex-shrink:0;margin-top:2px"></div>
-              <div><div class="wf-text" style="width:95px;margin-bottom:4px"></div><div class="wf-text" style="width:75px"></div></div>
+              <div><span class="wf-text" style="width:95px;margin-bottom:4px"></span><span class="wf-text" style="width:75px"></span></div>
             </div>
           </div>
-          <div class="col-6">
-            <div class="wf-card-dark d-flex gap-2 align-items-start">
+          <div class="col-6" style="min-width:0">
+            <div style="border:1px solid #ccc;background:#e8e8e8;padding:16px;display:flex;gap:12px;align-items:flex-start">
               <div class="wf-box" style="width:20px;height:20px;flex-shrink:0;margin-top:2px"></div>
-              <div><div class="wf-text" style="width:100px;margin-bottom:4px"></div><div class="wf-text" style="width:80px"></div></div>
+              <div><span class="wf-text" style="width:100px;margin-bottom:4px"></span><span class="wf-text" style="width:80px"></span></div>
             </div>
           </div>
-          <div class="col-6">
-            <div class="wf-card-dark d-flex gap-2 align-items-start">
+          <div class="col-6" style="min-width:0">
+            <div style="border:1px solid #ccc;background:#e8e8e8;padding:16px;display:flex;gap:12px;align-items:flex-start">
               <div class="wf-box" style="width:20px;height:20px;flex-shrink:0;margin-top:2px"></div>
-              <div><div class="wf-text" style="width:105px;margin-bottom:4px"></div><div class="wf-text" style="width:80px"></div></div>
+              <div><span class="wf-text" style="width:105px;margin-bottom:4px"></span><span class="wf-text" style="width:80px"></span></div>
             </div>
           </div>
-          <div class="col-6">
-            <div class="wf-card-dark d-flex gap-2 align-items-start">
+          <div class="col-6" style="min-width:0">
+            <div style="border:1px solid #ccc;background:#e8e8e8;padding:16px;display:flex;gap:12px;align-items:flex-start">
               <div class="wf-box" style="width:20px;height:20px;flex-shrink:0;margin-top:2px"></div>
-              <div><div class="wf-text" style="width:115px;margin-bottom:4px"></div><div class="wf-text" style="width:90px"></div></div>
+              <div><span class="wf-text" style="width:115px;margin-bottom:4px"></span><span class="wf-text" style="width:90px"></span></div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 
-<!-- ABOUT PROJECT -->
-<div class="section-label">Section — About the Project</div>
-<section class="alt">
-  <div class="container">
-    <div class="wf-heading">About the Project</div>
-    <div class="row g-4 mt-1 align-items-stretch">
+<!-- PARALLELOGRAM BAND -->
+<div class="para-band dark" aria-hidden="true"></div>
 
-      <div class="col-lg-7">
-        <div class="wf-text"></div>
-        <div class="wf-text"></div>
-        <div class="wf-text" style="width:85%"></div>
-        <div class="wf-text"></div>
-        <div class="wf-text" style="width:70%"></div>
-        <div class="wf-notice mt-3">[ Project description, goals and partner organisations — placeholder ]</div>
-        <div class="mt-3">
-          <a href="#team" class="wf-btn">[ Meet the Team ]</a>
+
+<!-- ── ABOUT PROJECT / STATS ─────────────────────────────────── -->
+<div class="section-label-strip">Section — About the Project</div>
+<section class="section ui-dark" style="position:relative;overflow:hidden">
+  <svg class="diamond-deco" style="right:-60px;bottom:10%;width:320px;height:320px" viewBox="0 0 100 100" aria-hidden="true">
+    <polygon points="50,2 98,50 50,98 2,50" fill="none" stroke="#333" stroke-width="0.6"/>
+    <polygon points="50,14 86,50 50,86 14,50" fill="none" stroke="#2a2a2a" stroke-width="0.4"/>
+  </svg>
+  <div class="container-h">
+    <div class="grid" style="align-items:stretch">
+      <div class="col-7 reveal-fade">
+        <span class="eyebrow">About the Project</span>
+        <span class="wf-text" style="background:#2a2a2a"></span>
+        <span class="wf-text" style="background:#2a2a2a"></span>
+        <span class="wf-text" style="width:85%;background:#2a2a2a"></span>
+        <span class="wf-text" style="background:#2a2a2a"></span>
+        <span class="wf-text" style="width:70%;background:#2a2a2a"></span>
+        <div class="wf-notice" style="margin-top:20px;border-color:#333;background:#2a2a2a;color:#555">[ Project description, goals and partner organisations — placeholder ]</div>
+        <div style="margin-top:24px">
+          <a href="#team" style="display:inline-block;border:1px solid #444;color:#bbb;padding:12px 28px;border-radius:100px;font-size:13px">Meet the Team →</a>
         </div>
       </div>
-
-      <div class="col-lg-5 d-flex">
-        <div class="d-flex flex-column w-100 gap-2">
-          <div class="wf-card-dark text-center p-3 flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-            <div style="font-size:28px; font-weight:bold; color:#555">200</div>
-            <div style="font-size:11px; color:#777">samples / month — current capacity</div>
+      <div class="col-5 reveal-fade">
+        <div style="display:flex;flex-direction:column;gap:12px;height:100%">
+          <div style="border:1px solid #2a2a2a;padding:32px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+            <span class="stat-num" data-count="200">0</span>
+            <span class="stat-label">samples / month — current capacity</span>
           </div>
-          <div class="row g-2">
-            <div class="col-6">
-              <div class="wf-card-dark text-center p-3">
-                <div style="font-size:24px; font-weight:bold; color:#555">4</div>
-                <div style="font-size:11px; color:#777">international donors</div>
-              </div>
+          <div style="display:flex;gap:12px">
+            <div style="border:1px solid #2a2a2a;padding:24px;flex:1;text-align:center">
+              <span class="stat-num" data-count="4">0</span>
+              <span class="stat-label">international donors</span>
             </div>
-            <div class="col-6">
-              <div class="wf-card-dark text-center p-3">
-                <div style="font-size:24px; font-weight:bold; color:#555">2</div>
-                <div style="font-size:11px; color:#777">languages served</div>
-              </div>
+            <div style="border:1px solid #2a2a2a;padding:24px;flex:1;text-align:center">
+              <span class="stat-num" data-count="2">0</span>
+              <span class="stat-label">languages served</span>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 
-<!-- TEAM -->
-<div class="section-label">Section — Our Team</div>
-<section id="team">
-  <div class="container">
-    <div class="wf-heading">Our Team</div>
-    <div class="row g-3 mt-1">
+<!-- PARALLELOGRAM BAND (inverted) -->
+<div class="para-band inv" aria-hidden="true"></div>
 
-      <div class="col-sm-6 col-lg-4">
-        <div class="wf-card text-center">
-          <div class="wf-avatar">HY</div>
-          <div style="font-weight:bold">Hanna Yakusheva</div>
-          <div class="wf-text mx-auto mt-1" style="width:80px;height:8px;background:#bbb"></div>
-          <div class="wf-text mx-auto mt-2" style="width:90%"></div>
-          <div class="wf-text mx-auto" style="width:75%"></div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="wf-card text-center">
-          <div class="wf-avatar">LD</div>
-          <div style="font-weight:bold">Liubov Demchenko</div>
-          <div class="wf-text mx-auto mt-1" style="width:80px;height:8px;background:#bbb"></div>
-          <div class="wf-text mx-auto mt-2" style="width:90%"></div>
-          <div class="wf-text mx-auto" style="width:75%"></div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="wf-card text-center">
-          <div class="wf-avatar">MF</div>
-          <div style="font-weight:bold">Marina Fadeeva</div>
-          <div class="wf-text mx-auto mt-1" style="width:80px;height:8px;background:#bbb"></div>
-          <div class="wf-text mx-auto mt-2" style="width:90%"></div>
-          <div class="wf-text mx-auto" style="width:75%"></div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="wf-card text-center">
-          <div class="wf-avatar">DK</div>
-          <div style="font-weight:bold">Dmytro Kharytonov</div>
-          <div class="wf-text mx-auto mt-1" style="width:80px;height:8px;background:#bbb"></div>
-          <div class="wf-text mx-auto mt-2" style="width:90%"></div>
-          <div class="wf-text mx-auto" style="width:75%"></div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="wf-card text-center">
-          <div class="wf-avatar">ST</div>
-          <div style="font-weight:bold">Svitlana Tikhlivets</div>
-          <div class="wf-text mx-auto mt-1" style="width:80px;height:8px;background:#bbb"></div>
-          <div class="wf-text mx-auto mt-2" style="width:90%"></div>
-          <div class="wf-text mx-auto" style="width:75%"></div>
-        </div>
-      </div>
 
+<!-- ── TEAM ───────────────────────────────────────────────────── -->
+<div class="section-label-strip">Section — Our Team</div>
+<section class="section ui-light" id="team">
+  <div class="container-h">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;gap:16px;flex-wrap:wrap">
+      <h2 class="t-h3 reveal-fade">Our Team</h2>
+    </div>
+    <div class="grid">
+      <div class="col-4 reveal-fade">
+        <div class="team-card">
+          <div class="wf-avatar" style="width:64px;height:64px;margin:0 auto 16px;font-size:14px">HY</div>
+          <div style="font-weight:700;font-size:var(--t18);letter-spacing:-0.03em;margin-bottom:4px">Hanna Yakusheva</div>
+          <span class="wf-text" style="width:80px;height:8px;background:#bbb;margin-bottom:10px"></span>
+          <span class="wf-text" style="width:90%"></span>
+          <span class="wf-text" style="width:75%"></span>
+        </div>
+      </div>
+      <div class="col-4 reveal-fade">
+        <div class="team-card">
+          <div class="wf-avatar" style="width:64px;height:64px;margin:0 auto 16px;font-size:14px">LD</div>
+          <div style="font-weight:700;font-size:var(--t18);letter-spacing:-0.03em;margin-bottom:4px">Liubov Demchenko</div>
+          <span class="wf-text" style="width:80px;height:8px;background:#bbb;margin-bottom:10px"></span>
+          <span class="wf-text" style="width:90%"></span>
+          <span class="wf-text" style="width:75%"></span>
+        </div>
+      </div>
+      <div class="col-4 reveal-fade">
+        <div class="team-card">
+          <div class="wf-avatar" style="width:64px;height:64px;margin:0 auto 16px;font-size:14px">MF</div>
+          <div style="font-weight:700;font-size:var(--t18);letter-spacing:-0.03em;margin-bottom:4px">Marina Fadeeva</div>
+          <span class="wf-text" style="width:80px;height:8px;background:#bbb;margin-bottom:10px"></span>
+          <span class="wf-text" style="width:90%"></span>
+          <span class="wf-text" style="width:75%"></span>
+        </div>
+      </div>
+      <div class="col-4 reveal-fade">
+        <div class="team-card">
+          <div class="wf-avatar" style="width:64px;height:64px;margin:0 auto 16px;font-size:14px">DK</div>
+          <div style="font-weight:700;font-size:var(--t18);letter-spacing:-0.03em;margin-bottom:4px">Dmytro Kharytonov</div>
+          <span class="wf-text" style="width:80px;height:8px;background:#bbb;margin-bottom:10px"></span>
+          <span class="wf-text" style="width:90%"></span>
+          <span class="wf-text" style="width:75%"></span>
+        </div>
+      </div>
+      <div class="col-4 reveal-fade">
+        <div class="team-card">
+          <div class="wf-avatar" style="width:64px;height:64px;margin:0 auto 16px;font-size:14px">ST</div>
+          <div style="font-weight:700;font-size:var(--t18);letter-spacing:-0.03em;margin-bottom:4px">Svitlana Tikhlivets</div>
+          <span class="wf-text" style="width:80px;height:8px;background:#bbb;margin-bottom:10px"></span>
+          <span class="wf-text" style="width:90%"></span>
+          <span class="wf-text" style="width:75%"></span>
+        </div>
+      </div>
     </div>
 
     <!-- Staff Training -->
-    <div class="wf-heading mt-5 mb-3" style="font-size:15px">Staff Training</div>
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="wf-card d-flex gap-3 align-items-start">
-          <div class="wf-box" style="width:36px;height:36px;flex-shrink:0"></div>
-          <div>
-            <div style="font-weight:bold;margin-bottom:4px">Ukraine Training</div>
-            <div class="wf-text"></div>
-            <div class="wf-text" style="width:80%"></div>
+    <div style="margin-top:72px;border-top:1px solid #ccc;padding-top:56px">
+      <span class="eyebrow">Staff Training</span>
+      <div class="grid">
+        <div class="col-4 reveal-fade">
+          <div style="border:1px solid #ccc;background:#e8e8e8;padding:24px;display:flex;gap:16px;align-items:flex-start">
+            <div class="wf-box" style="width:36px;height:36px;flex-shrink:0"></div>
+            <div>
+              <div style="font-weight:700;margin-bottom:8px">Ukraine Training</div>
+              <span class="wf-text"></span><span class="wf-text" style="width:80%"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 reveal-fade">
+          <div style="border:1px solid #ccc;background:#e8e8e8;padding:24px;display:flex;gap:16px;align-items:flex-start">
+            <div class="wf-box" style="width:36px;height:36px;flex-shrink:0"></div>
+            <div>
+              <div style="font-weight:700;margin-bottom:8px">International Standards</div>
+              <span class="wf-text"></span><span class="wf-text" style="width:75%"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 reveal-fade">
+          <div style="border:1px solid #ccc;background:#e8e8e8;padding:24px;display:flex;gap:16px;align-items:flex-start">
+            <div class="wf-box" style="width:36px;height:36px;flex-shrink:0"></div>
+            <div>
+              <div style="font-weight:700;margin-bottom:8px">Lab Internships</div>
+              <span class="wf-text"></span><span class="wf-text" style="width:80%"></span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="wf-card d-flex gap-3 align-items-start">
-          <div class="wf-box" style="width:36px;height:36px;flex-shrink:0"></div>
-          <div>
-            <div style="font-weight:bold;margin-bottom:4px">International Standards</div>
-            <div class="wf-text"></div>
-            <div class="wf-text" style="width:75%"></div>
-          </div>
-        </div>
+      <div style="margin-top:32px">
+        <a href="contact.html" style="display:inline-block;background:#1e1e1e;color:#f2f2f2;padding:12px 28px;border-radius:100px;font-size:13px;font-weight:600">Contact Us</a>
       </div>
-      <div class="col-md-4">
-        <div class="wf-card d-flex gap-3 align-items-start">
-          <div class="wf-box" style="width:36px;height:36px;flex-shrink:0"></div>
-          <div>
-            <div style="font-weight:bold;margin-bottom:4px">Lab Internships</div>
-            <div class="wf-text"></div>
-            <div class="wf-text" style="width:80%"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="text-center mt-4">
-      <a href="contact.html" class="wf-btn">[ Contact Us ]</a>
     </div>
 
   </div>
 </section>
 
 
-<!-- DOCUMENTS -->
-<div class="section-label">Section — Regulatory Documents</div>
-<section>
-  <div class="container">
-    <div class="wf-heading">Regulatory Documents</div>
-
-    <div class="d-flex gap-2 mb-4 flex-wrap mt-2">
-      <span class="wf-btn">All</span>
-      <span class="wf-btn-outline">Accreditations</span>
-      <span class="wf-btn-outline">Standards</span>
-      <span class="wf-btn-outline">Permits</span>
+<!-- ── REGULATORY DOCUMENTS ────────────────────────────────── -->
+<div class="section-label-strip">Section — Regulatory Documents</div>
+<section class="section ui-grey">
+  <div class="container-h">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px">
+      <h2 class="t-h3 reveal-fade">Regulatory Documents</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="display:inline-block;background:#1e1e1e;color:#f2f2f2;padding:6px 16px;border-radius:100px;font-size:12px;cursor:pointer">All</span>
+        <span style="display:inline-block;border:1px solid #bbb;color:#555;padding:6px 16px;border-radius:100px;font-size:12px;cursor:pointer">Accreditations</span>
+        <span style="display:inline-block;border:1px solid #bbb;color:#555;padding:6px 16px;border-radius:100px;font-size:12px;cursor:pointer">Standards</span>
+        <span style="display:inline-block;border:1px solid #bbb;color:#555;padding:6px 16px;border-radius:100px;font-size:12px;cursor:pointer">Permits</span>
+      </div>
     </div>
-
-    <div class="row g-3">
-      <div class="col-md-6">
-        <div class="wf-card">
-          <div class="d-flex justify-content-between align-items-start mb-2">
+    <div class="grid">
+      <div class="col-6 reveal-fade">
+        <div class="doc-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
             <div>
-              <div style="font-weight:bold">DSTU ISO 10012:2005</div>
-              <div class="wf-text mt-1" style="width:180px"></div>
+              <div style="font-weight:700;font-size:var(--t18);letter-spacing:-0.03em">DSTU ISO 10012:2005</div>
+              <span class="wf-text" style="width:180px;margin-top:6px"></span>
             </div>
-            <span class="wf-badge">Active</span>
+            <span class="wf-badge" style="background:#c8c8c8">Active</span>
           </div>
-          <span class="wf-btn-outline" style="font-size:11px">[ Download (placeholder) ]</span>
+          <a href="#" style="display:inline-block;border:1px solid #bbb;color:#555;padding:6px 16px;font-size:12px;border-radius:100px">Download (placeholder)</a>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="wf-card">
-          <div class="d-flex justify-content-between align-items-start mb-2">
+      <div class="col-6 reveal-fade">
+        <div class="doc-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
             <div>
-              <div style="font-weight:bold">DSTU EN ISO/IEC 17025:2019</div>
-              <div class="wf-text mt-1" style="width:160px"></div>
+              <div style="font-weight:700;font-size:var(--t18);letter-spacing:-0.03em">DSTU EN ISO/IEC 17025:2019</div>
+              <span class="wf-text" style="width:160px;margin-top:6px"></span>
             </div>
             <span class="wf-badge">In Progress</span>
           </div>
@@ -323,83 +455,133 @@
         </div>
       </div>
     </div>
-
-    <div class="wf-notice mt-3">Additional documents will be published upon receipt of accreditation.</div>
-    <div class="mt-3"><a href="contact.html" class="wf-btn">[ Request our full credentials ]</a></div>
+    <div class="wf-notice" style="margin-top:20px">Additional documents will be published upon receipt of accreditation.</div>
+    <div style="margin-top:24px">
+      <a href="contact.html" style="display:inline-block;background:#1e1e1e;color:#f2f2f2;padding:12px 28px;border-radius:100px;font-size:13px;font-weight:600">Request Our Full Credentials</a>
+    </div>
   </div>
 </section>
 
 
-<!-- DONORS -->
-<div class="section-label">Section — Our Donors</div>
-<section class="alt">
-  <div class="container">
-    <div class="wf-heading">Our Donors</div>
-    <div class="wf-subhead">Gratitude text</div>
-    <div class="row g-3">
-      <div class="col-sm-6 col-lg-3">
-        <div class="wf-card text-center">
-          <div class="wf-img mx-auto mb-2" style="width:100%;height:70px">Logo placeholder</div>
-          <div style="font-weight:bold;margin-bottom:4px">Swiss Confederation</div>
-          <div class="wf-text mx-auto" style="width:90%"></div>
+<!-- ── DONORS ─────────────────────────────────────────────────── -->
+<div class="section-label-strip">Section — Our Donors</div>
+<section class="section ui-light">
+  <div class="container-h">
+    <div style="margin-bottom:56px">
+      <span class="eyebrow">Supported by</span>
+      <h2 class="t-h3 reveal-fade">Our Donors</h2>
+    </div>
+    <div class="grid">
+      <div class="col-3 reveal-fade">
+        <div class="donor-card">
+          <div class="wf-img" style="width:100%;height:70px;margin-bottom:16px">Logo placeholder</div>
+          <div style="font-weight:700;margin-bottom:6px">Swiss Confederation</div>
+          <span class="wf-text" style="width:90%"></span>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="wf-card text-center">
-          <div class="wf-img mx-auto mb-2" style="width:100%;height:70px">Logo placeholder</div>
-          <div style="font-weight:bold;margin-bottom:4px">Enabel</div>
-          <div class="wf-text mx-auto" style="width:90%"></div>
+      <div class="col-3 reveal-fade">
+        <div class="donor-card">
+          <div class="wf-img" style="width:100%;height:70px;margin-bottom:16px">Logo placeholder</div>
+          <div style="font-weight:700;margin-bottom:6px">Enabel</div>
+          <span class="wf-text" style="width:90%"></span>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="wf-card text-center">
-          <div class="wf-img mx-auto mb-2" style="width:100%;height:70px">Logo placeholder</div>
-          <div style="font-weight:bold;margin-bottom:4px">World Bank</div>
-          <div class="wf-text mx-auto" style="width:90%"></div>
+      <div class="col-3 reveal-fade">
+        <div class="donor-card">
+          <div class="wf-img" style="width:100%;height:70px;margin-bottom:16px">Logo placeholder</div>
+          <div style="font-weight:700;margin-bottom:6px">World Bank</div>
+          <span class="wf-text" style="width:90%"></span>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="wf-card text-center">
-          <div class="wf-img mx-auto mb-2" style="width:100%;height:70px">Logo placeholder</div>
-          <div style="font-weight:bold;margin-bottom:4px">Amiens Métropole</div>
-          <div class="wf-text mx-auto" style="width:90%"></div>
+      <div class="col-3 reveal-fade">
+        <div class="donor-card">
+          <div class="wf-img" style="width:100%;height:70px;margin-bottom:16px">Logo placeholder</div>
+          <div style="font-weight:700;margin-bottom:6px">Amiens Métropole</div>
+          <span class="wf-text" style="width:90%"></span>
         </div>
       </div>
     </div>
-    <div class="wf-notice mt-3">Disclaimer: "Supported by Switzerland through SDC. Views are those of the authors only."</div>
+    <div class="wf-notice" style="margin-top:20px">Disclaimer: "Supported by Switzerland through SDC. Views are those of the authors only."</div>
+  </div>
+</section>
+
+
+<!-- ── CTA ───────────────────────────────────────────────────── -->
+<section class="section-sm ui-grey" style="border-top:1px solid #ccc">
+  <div class="container-h">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap">
+      <div class="cta-muted-text reveal-fade">Ready<br>to Get<br>Tested?</div>
+      <a href="contact.html" class="cta-circle-btn">
+        <span style="font-size:28px">↗</span>
+        <span style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;text-align:center">Submit a<br>Request</span>
+      </a>
+    </div>
   </div>
 </section>
 
 
 <!-- FOOTER -->
-<div class="section-label">Footer</div>
-<footer id="footer">
-  <div class="container">
-    <div class="row g-3">
-      <div class="col-lg-4">
-        <div style="font-weight:bold; font-size:16px; margin-bottom:6px">ECOLAB</div>
-        <div class="wf-text" style="width:200px"></div>
-        <div class="wf-text" style="width:140px; margin-top:4px"></div>
-        <div class="wf-text" style="width:160px; margin-top:8px; background:#aaa"></div>
-      </div>
-      <div class="col-lg-4">
-        <div style="font-weight:bold; margin-bottom:8px">Navigation</div>
-        <a href="index.html"    class="d-block wf-nav-link mb-1">Home</a>
-        <a href="about.html"    class="d-block wf-nav-link mb-1">About</a>
-        <a href="services.html" class="d-block wf-nav-link mb-1">Services</a>
-      </div>
-      <div class="col-lg-4">
-        <div style="font-weight:bold; margin-bottom:6px">Supported by</div>
-        <div class="wf-text"></div>
-        <div class="wf-text" style="width:85%"></div>
-        <div class="wf-text" style="width:70%"></div>
-      </div>
+<div class="section-label-strip">Footer</div>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div style="font-weight:700;font-size:18px;letter-spacing:-0.02em;margin-bottom:12px">ECOLAB</div>
+      <span class="wf-text" style="max-width:220px;display:block"></span>
+      <span class="wf-text" style="max-width:160px;display:block;margin-top:4px"></span>
+      <span class="wf-text" style="max-width:180px;display:block;margin-top:10px;background:#aaa"></span>
     </div>
-    <hr class="wf-divider" style="margin-top:24px">
-    <div class="wf-notice" style="font-size:11px">Disclaimer text / Copyright © 2025 EKO LAB</div>
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:12px">Navigation</div>
+      <a href="index.html"    class="footer-nav-link">Home</a>
+      <a href="about.html"    class="footer-nav-link">About</a>
+      <a href="services.html" class="footer-nav-link">Services</a>
+      <a href="contact.html"  class="footer-nav-link">Contact</a>
+    </div>
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:12px">Supported by</div>
+      <span class="wf-text" style="display:block"></span>
+      <span class="wf-text" style="display:block;width:85%"></span>
+      <span class="wf-text" style="display:block;width:70%"></span>
+    </div>
   </div>
+  <div class="footer-meta">Disclaimer text / Copyright © 2025 EKO LAB</div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+  const lenis = new Lenis({ lerp: 0.08, smooth: true });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  document.getElementById('menuBtn').addEventListener('click',  () => document.getElementById('navOverlay').classList.add('open'));
+  document.getElementById('navClose').addEventListener('click', () => document.getElementById('navOverlay').classList.remove('open'));
+
+  gsap.utils.toArray('.reveal-fade').forEach(el => {
+    gsap.fromTo(el, { opacity: 0, y: 40 }, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+    });
+  });
+
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-count'));
+    ScrollTrigger.create({
+      trigger: el, start: 'top 80%',
+      onEnter: () => {
+        gsap.to({ val: 0 }, {
+          val: target, duration: 1.4, ease: 'power2.out',
+          onUpdate: function() { el.textContent = Math.round(this.targets()[0].val); },
+          onComplete: () => { el.textContent = target; }
+        });
+      },
+      once: true
+    });
+  });
+</script>
 </body>
 </html>
